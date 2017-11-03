@@ -1,0 +1,69 @@
+{extend name="common@layout:base" /}
+{block name="title"}添加友情链接 - {__block__}{/block}
+{block name="styleLinks"}{/block}
+{block name="styles"}{/block}
+
+{block name="main"}
+<a class="btn btn-primary" href="{:url('index')}">
+    <i class="fa fa-list-alt"></i> 列表
+</a>
+<a class="btn btn-success" href="{:url('create')}">
+    <i class="fa fa-plus"></i> 添加
+</a>
+<div class="hr dotted"></div>
+
+<form class="form-horizontal" action="{:url('save')}" method="post" enctype="multipart/form-data" role="form">
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 友情链接名称： </label>
+        <div class="col-md-9">
+            <input type="text" class="col-xs-10 col-md-5" name="friend_name">
+            <span class="help-inline col-xs-12 col-md-7"><span class="middle red">*</span></span>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 友情链接URL： </label>
+        <div class="col-md-9">
+            <input type="text" class="col-xs-10 col-md-5" name="friend_url">
+            <span class="help-inline col-xs-12 col-md-7"><span class="middle red">*</span></span>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 友情链接图片： </label>
+        <div class="col-md-9">
+            <input type="file" class="col-xs-10 col-md-5" name="friend_img_pic">
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 是否显示： </label>
+        <div class="col-md-9">
+            <label class="checkbox-inline">
+                <input type="radio" class="ace" name="friend_is_show" value="0"/>
+                <span class="lbl"> 否 </span>
+            </label>
+            <label class="checkbox-inline">
+                <input type="radio" class="ace" name="friend_is_show" value="1" checked/>
+                <span class="lbl"> 是 </span>
+            </label>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-2 col-md-9">
+            <button class="btn" type="reset"><i class="fa fa-undo bigger-110"></i> 重置</button>
+            &nbsp; &nbsp; &nbsp;
+            <button type="submit" class="btn btn-info"><i class="fa fa-check"></i> 提交</button>
+        </div>
+    </div>
+    <div class="hr hr-24"></div>
+</form>
+{/block}
+{block name="scriptLinks"}{/block}
+{block name="scripts"}{/block}

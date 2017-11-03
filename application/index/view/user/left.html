@@ -1,0 +1,18 @@
+<div class="col-md-3">
+    <div class="text-center madia named">
+        <img src="__ROOT__{:session('user.user_img')}" class="img-circle"/>
+        <h4 class="text-center">{:session('user.user_name')}</h4>
+    </div>
+    <ul class="ect text-center madia clearfix">
+        <li class="ected pull-left"><span>{$left['attentionNum']}</span><span>关注</span></li>
+        <li class="pull-left ecte"></li>
+        <li class="ected pull-left"><span>{$left['fans']}</span><span>粉丝</span></li>
+    </ul>
+    <ul class="nav news">
+        <li {$left.active=='news'?'class="newsnoe"':''}><a href="{:url('User/news')}"><span><img src="__STATIC__/images/x11.png" alt=""></span>我的消息</a></li>
+        <li {$left.active=='study'?'class="newsnoe"':''}><a href="{:url('User/study')}"><span><img src="__STATIC__/images/x22.png" alt=""></span>我的学习</a></li>
+        <li {$left.active=='grade'?'class="newsnoe"':''}><a href="{:url('User/grade')}"><span><img src="__STATIC__/images/x33.png" alt=""></span>我的班级</a></li>
+        <li {$left.active=='focus'?'class="newsnoe"':''}><a href="{:url('User/focus')}"><span><img src="__STATIC__/images/x44.png" alt=""></span>我的关注</a></li>
+        <li {$left.active=='edit'?'class="newsnoe"':''}><a href="{:url('User/edit')}"><span><img src="__STATIC__/images/x5.png" alt=""></span>个人设置</a></li>
+    </ul>
+</div>

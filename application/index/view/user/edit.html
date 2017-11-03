@@ -1,0 +1,144 @@
+{extend name="common@layout:base" /}
+{block name="title"}个人设置 - {__block__}{/block}
+
+{block name="styles"}
+<style>
+    .hide {
+        display: none;
+    }
+</style>
+{/block}
+{block name="main"}
+<div class="containered">
+    <div class="container">
+        <div class="row cored">
+            <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                <!--—左侧导航栏  -->
+                {include file="user/left" /}
+                <!--—右侧管理信息中心 -->
+                <div class="col-md-9">
+                    <h4>基本信息</h4>
+                    <form class="form-horizontal pub" role="form" id="form" action="{:url('update',['user_id'=>$field['user_id']])}">
+                        <div class="form-group">
+                            <h5 class="col-md-3 text-right">用户名：</h5>
+
+                            <div class="col-md-6">
+                                <input type="text" name="user_name" placeholder="请输入用户名"
+                                       class="col-md-10 col-lg-8 form-control" value="{$field.user_name}">
+                            </div>
+                        </div>
+
+                        <div class="space-4"></div>
+
+                        <div class="form-group">
+                            <h5 class="col-md-3 text-right">个性签名：</h5>
+
+                            <div class="col-sm-6">
+                                <textarea name="signature" cols="30" rows="3" placeholder="请说点什么吧"
+                                          class="col-md-10 col-lg-8 form-control">{$field.signature}</textarea>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <h5 class="col-md-3 text-right">性别：</h5>
+
+                            <div class="col-sm-6 sex">
+                                <div class="radio radio-inline radio-success">
+                                    <input type="radio" name="user_sex" id="user_sex1" value="1"
+                                           {$field.user_sex==1?'checked':''}>
+                                    <label for="user_sex1">男</label>
+                                </div>
+                                <div class="radio radio-inline radio-success">
+                                    <input type="radio" name="user_sex" id="user_sex0" value="0"
+                                           {$field.user_sex==0?'checked':''}>
+                                    <label for="user_sex0">女</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <h5 class="col-md-3 text-right">职业：</h5>
+                            <div class="col-md-3">
+                                <select class="form-control" name="user_job">
+                                    {foreach name="userJob" item="vo"}
+                                    <option value="{$key}">{$vo}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group">
+                            <h5 class="col-md-3 text-right">学习方向：</h5>
+                            <div class="col-md-3">
+                                <select class="form-control">
+                                    <option value="">2020</option>
+                                    <option value="AL">设计师</option>
+                                    <option value="AL">店长管理</option>
+                                    <option value="AL">技术工</option>
+                                    <option value="AL">图纸报表</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="form-group" id="city">
+                            <h5 class="col-md-3 text-right">现居住地址：</h5>
+                            <div class="col-md-3">
+                                <select class="form-control prov" name="province"></select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control city" name="city" disabled="disabled"></select>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control dist" name="district" disabled="disabled"></select>
+                            </div>
+                        </div>
+                        <div class="space-4"></div>
+                        <div class="col-md-2 col-md-offset-3">
+                            <button type="button" class="btn btn-success form-control" id="subBtn">保存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="scriptLinks"}
+{load href="__ROOT__/plugin/city/jquery.cityselect.js"}
+{/block}
+{block name="scripts"}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#city").citySelect({
+            url: "__ROOT__/plugin/city/city.min.js",
+            prov: "{$field.province}",
+            city: "{$field.city}",
+            dist: "{$field.district}",
+            nodata: "none"
+        });
+
+        $("#subBtn").on('click', function () {
+            var form = $("#form");
+            $.ajax({
+                type: 'post',
+                url: form.attr('action'),
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (res) {
+                    layer.closeAll('loading');
+                    if (res.status == 1) {
+                        layer.msg(res.info, {icon: 6, time: 1000});
+                    } else {
+                        layer.msg(res.info, {icon: 5});
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    layer.closeAll('loading');
+                    layer.msg('服务器正在忙，请销后提交。', {icon: 5});
+                }
+            })
+        });
+    })
+</script>
+{/block}

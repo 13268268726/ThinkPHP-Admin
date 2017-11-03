@@ -1,0 +1,275 @@
+{extend name="common@layout:base" /}
+{block name="title"}dropzone上传 - {__block__}{/block}
+{block name="styleLinks"}
+<link rel="stylesheet" href="__ROOT__/admin/static/css/dropzone.min.css"/>
+{/block}
+{block name="styles"}{/block}
+{block name="breadcrumbs"}
+{:widget('common/Layout/breadcrumbs', ['crumbs'=>['AAA','bbbb','ccc']])}
+{/block}
+{block name="main"}
+<div class="alert alert-info">
+    <i class="ace-icon fa fa-hand-o-right"></i>
+
+    Please note that demo server is not configured to save uploaded files, therefore you may get an error message.
+    <button class="close" data-dismiss="alert">
+        <i class="ace-icon fa fa-times"></i>
+    </button>
+</div>
+
+<div>
+    <form action="{:url('uploadApi')}" class="dropzone well" id="dropzone">
+        <div class="fallback">
+            <input name="file" type="file" multiple=""/>
+        </div>
+
+
+    </form>
+</div>
+
+
+<!--Dropzone视图布局-->
+<div id="preview-template" class="hide">
+    <div class="dz-preview dz-file-preview">
+        <div class="dz-image">
+            <img data-dz-thumbnail=""/>
+        </div>
+
+        <div class="dz-details">
+            <div class="dz-size">
+                <span data-dz-size=""></span>
+            </div>
+
+            <div class="dz-filename">
+                <span data-dz-name=""></span>
+            </div>
+        </div>
+
+        <div class="dz-progress">
+            <span class="dz-upload" data-dz-uploadprogress=""></span>
+        </div>
+
+        <div class="dz-error-message">
+            <span data-dz-errormessage=""></span>
+        </div>
+
+        <div class="dz-remove">
+            <button type="button" id="btnRemove" data-dz-remove>删除</button>
+            <span title="Click me to remove the file." data-dz-remove>删除</span>
+        </div>
+
+        <div class="dz-success-mark">
+            <span class="fa-stack fa-lg bigger-150">
+                <i class="fa fa-circle fa-stack-2x white"></i>
+                <i class="fa fa-check fa-stack-1x fa-inverse green"></i>
+            </span>
+        </div>
+
+        <div class="dz-error-mark">
+            <span class="fa-stack fa-lg bigger-150">
+                <i class="fa fa-circle fa-stack-2x white"></i>
+                <i class="fa fa-remove fa-stack-1x fa-inverse red"></i>
+            </span>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="scriptLinks"}
+<script src="__ROOT__/admin/static/js/dropzone.min.js"></script>
+{/block}
+{block name="scripts"}
+<script>
+    jQuery(function ($) {
+        try {
+            Dropzone.autoDiscover = false;
+
+            // 不使用jQuery框架，初始化Dropzone
+            var myDropzone = new Dropzone('#dropzone', {
+                previewTemplate: $('#preview-template').html(),
+
+                thumbnailHeight: 120,
+                thumbnailWidth: 120,
+                maxFilesize: 0.5,
+
+                //addRemoveLinks : true,
+                //dictRemoveFile: 'Remove',
+
+                dictDefaultMessage: '<span class="bigger-150 bolder"><i class="ace-icon fa fa-caret-right red"></i> Drop files</span> to upload \
+                            <span class="smaller-80 grey">(or click)</span> <br /> \
+                            <i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i>'
+                ,
+
+                // 从列表中删除一个文件。你可以监听该事件然后从您的服务器删除文件
+                removedfile: function (file) {
+                 console.log("File " + file.name + "被删除");
+                 var r;
+                 if ((r = file.previewElement) != null) {
+                 r.parentNode.removeChild(file.previewElement)
+                 }
+                 return this._updateMaxFilesReachedClass()
+                 },
+
+                thumbnail: function (file, dataUrl) {
+                    if (file.previewElement) {
+                        $(file.previewElement).removeClass("dz-file-preview");
+                        var images = $(file.previewElement).find("[data-dz-thumbnail]").each(function () {
+                            var thumbnailElement = this;
+                            thumbnailElement.alt = file.name;
+                            thumbnailElement.src = dataUrl;
+                        });
+                        setTimeout(function () {
+                            $(file.previewElement).addClass("dz-image-preview");
+                        }, 1);
+                    }
+                },
+
+
+                init: function () {
+                    this.on("addedfile", function (file) {
+//                        alert("Added file.");
+                    });
+
+                    this.on("removedfile", function (file) {
+                        console.log("removedfile file.");
+                        console.log(file);
+//            myDropzone.removeAllFiles(file);
+                    });
+
+                    $("#btnRemove").on("removedfile", function (file) {
+                        alert("removedfile file.");
+//            myDropzone.removeAllFiles();
+                    });
+
+                    /*this.on("removedfile", function(file) {
+                     alert("removedfile file.");
+                     });*/
+
+                    //自定义一个隐藏按钮给私下调用
+                    /*$("#btnRemove").click(function () {
+                     alert("removedfile file.");
+                     myDropZone.removeAllFiles();
+                     });*/
+
+
+                    /*var myDropZone = this;
+                     /!*$("#btnRemoveAll2").on("click",function () {
+                     console.log("removeAllFiles");
+                     myDropZone.removeAllFiles();
+                     });*!/
+                     $("#btnRemoveAll2").unbind("click").removeAttr("onclick").click(function () {
+                     console.log("removeAllFiles");
+                     myDropZone.removeAllFiles();
+                     });*/
+                    //最好在这里做这些事情
+                    /*this.on("addedfile", function(file) { alert("Added file."); });*/
+                     this.on("complete", function(file) {
+//                         myDropzone.removeFile(file);
+                     });
+                }
+
+            });
+
+
+            //simulating upload progress
+            var minSteps = 6,
+                    maxSteps = 60,
+                    timeBetweenSteps = 100,
+                    bytesPerStep = 100000;
+
+            myDropzone.uploadFiles = function (files) {
+                var self = this;
+
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    totalSteps = Math.round(Math.min(maxSteps, Math.max(minSteps, file.size / bytesPerStep)));
+
+                    for (var step = 0; step < totalSteps; step++) {
+                        var duration = timeBetweenSteps * (step + 1);
+                        setTimeout(function (file, totalSteps, step) {
+                            return function () {
+                                file.upload = {
+                                    progress: 100 * (step + 1) / totalSteps,
+                                    total: file.size,
+                                    bytesSent: (step + 1) * file.size / totalSteps
+                                };
+
+                                self.emit('uploadprogress', file, file.upload.progress, file.upload.bytesSent);
+                                if (file.upload.progress == 100) {
+                                    file.status = Dropzone.SUCCESS;
+                                    self.emit("success", file, 'success', null);
+                                    self.emit("complete", file);
+                                    self.processQueue();
+                                }
+                            };
+                        }(file, totalSteps, step), duration);
+                    }
+                }
+            };
+
+            /*Dropzone.options.myDropzone = {
+             init: function() {
+             this.on("addedfile", function(file) {
+
+             // Create the remove button
+             var removeButton = Dropzone.createElement("<button>Remove file</button>");
+
+
+             // Capture the Dropzone instance as closure.
+             var _this = this;
+
+             // Listen to the click event
+             removeButton.addEventListener("click", function(e) {
+             // Make sure the button click doesn't submit the form:
+             e.preventDefault();
+             e.stopPropagation();
+
+             // Remove the file preview.
+             _this.removeFile(file);
+             // If you want to the delete the file on the server as well,
+             // you can do the AJAX request here.
+             });
+
+             // Add the button to the file preview element.
+             file.previewElement.appendChild(removeButton);
+             });
+             }
+             };*/
+
+            /*Dropzone.options.myDropzone = {
+             init: function() {
+             this.on("sending", function(file) {
+             alert('Sending the file' +  file.name)
+             });
+
+             // Using a closure.
+             var _this = this;
+
+             // Setup the observer for the button.
+             document.querySelector("button#clear-dropzone").addEventObserver("click", function() {
+             // Using "_this" here, because "this" doesn't point to the dropzone anymore
+             _this.removeAllFiles();
+             // If you want to cancel uploads as well, you
+             // could also call _this.removeAllFiles(true);
+             });
+             }
+             };*/
+
+            //remove dropzone instance when leaving this page in ajax mode
+            $(document).one('ajaxloadstart.page', function (e) {
+                try {
+                    myDropzone.destroy();
+                } catch (e) {
+                }
+            });
+
+        } catch (e) {
+            alert('Dropzone.js不支持老的浏览器！');
+        }
+
+
+
+
+
+    });
+</script>
+{/block}

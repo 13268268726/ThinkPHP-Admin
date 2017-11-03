@@ -1,0 +1,115 @@
+{extend name="common@layout:base" /}
+{block name="title"}管理员列表 - {__block__}{/block}
+{block name="styleLinks"}{/block}
+{block name="styles"}{/block}
+
+{block name="main"}
+<a class="btn btn-primary" href="{:url('index')}">
+    <i class="fa fa-list-alt"></i> 列表
+</a>
+<a class="btn btn-success" href="{:url('create')}">
+    <i class="fa fa-plus"></i> 添加
+</a>
+<div class="hr dotted"></div>
+
+{present name="list"}
+<table id="simple-table" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th class="center">序号</th>
+        <th>{:set_order('admin_id','账号')}</th>
+        <th>邮箱</th>
+        <th>{:set_order('admin_sex','性别')}</th>
+        <th>{:set_order('created_at','创建时间')}</th>
+        <th>{:set_order('updated_at','修改时间')}</th>
+        <th>{:set_order('admin_ip','IP地址')}</th>
+        <th>头像</th>
+        <th>{:set_order('admin_state','状态')}</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {volist name="list" id="val"}
+    <tr>
+        <td class="center">{$key+1}</td>
+        <td class="name">{$val['admin_name']}</td>
+        <td>{if condition="empty($val['admin_email'])"}&nbsp;{else/}{$val['admin_email']}{/if}</td>
+        <td> {eq name="val['admin_sex']" value="1"}男{else/}女{/eq}</td>
+        <td>{//$val['created_at']|date="Y-m-d H:i:s",###}{$val['created_at']}</td>
+        <td>{if condition="$val['updated_at'] eq 0"}&nbsp;{else/}{//$val['updated_at']|date="Y-m-d H:i:s",###}{$val['updated_at']}{/if}</td>
+        <td>{$val['admin_ip']}</td>
+        <td><img src="__ROOT__{$val['admin_img']}" alt=""></td>
+        <td>{$AdminStateMsg[$val['admin_state']]}</td>
+        <td>
+            <input type="hidden" name="admin_id" value="{$val['admin_id']}">
+            <a class="btn btn-xs btn-info"
+               href="{:url('edit',get_current(['id'=>$val['admin_id']]))}">
+                <i class="fa fa-pencil"></i>
+                修改 </a>
+
+            {neq name="val['admin_id']" value="1"}
+            &nbsp;
+            <button class="btn btn-xs btn-danger" onclick="del.run(this)">
+                <i class="fa fa-trash bigger-120"></i> 删除
+            </button>
+            {/neq}
+        </td>
+    </tr>
+    {/volist}
+    </tbody>
+</table>
+<div class="hr dotted"></div>
+<div class="align-right page">{$PageInfo}</div>
+<div class="hr dotted"></div>
+{else/}
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times; </button>
+    没有查询到数据记录
+</div>
+{/present}
+{/block}
+{block name="scriptLinks"}{/block}
+{block name="scripts"}
+<script>
+    var ApiDel = "{:url('delete')}";
+
+    // 删除
+    var del = {
+        run: function (obj) {
+            var name = $(obj).parents('tr').children('.name').text();
+            layer.confirm('你真的要删除“' + name + '”这个管理员吗？', {
+                btn: ['确定', '取消'] //按钮
+            }, function () {
+                layer.load(1);
+                del._send(obj);
+            });
+        },
+        _send: function (obj) {
+            var admin_id = $(obj).parents('tr').find('input[name="admin_id"]').val();
+            $.ajax({
+                type: "POST",
+                url: ApiDel,
+                data: {'admin_id': admin_id},
+                dataType: "json",
+                success: function (res) {
+                    layer.closeAll('loading');
+                    if (res.status == 1) {
+                        layer.msg(res.info, {icon: 6}, function () {
+                            $(obj).parents('tr').css('display', 'none');
+                        });
+                    } else {
+                        layer.msg(res.info, {icon: 5});
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    layer.closeAll('loading');
+                    layer.msg('服务器正在忙，请销后提交。', {icon: 5});
+                    console.log(XMLHttpRequest.status);
+                    console.log(XMLHttpRequest.readyState);
+                    console.log(textStatus);
+                }
+            });
+        }
+    };
+</script>
+{/block}

@@ -1,0 +1,9 @@
+<ul class="nav ace-nav">
+    {foreach name="nav" item="val"}
+    <li class="{$classArr[$key]}">
+        <a href="{:url($val['name'])}">
+            {$val.title}
+        </a>
+    </li>
+    {/foreach}
+</ul>

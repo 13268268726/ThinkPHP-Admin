@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>{block name="title"}小助手{/block}</title>
+    <!-- Bootstrap -->
+    {load href="__STATIC__/css/bootstrap.min.css" /}
+    <!-- 自定义布局 -->
+    {load href="__STATIC__/css/main.css"}
+    {block name="styleLinks"}{/block}
+    {block name="styles"}{/block}
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    {load href="__STATIC__/js/html5shiv3.7.3.min.js" /}
+    {load href="__STATIC__/js/respond1.4.2.min.js" /}
+    <![endif]-->
+</head>
+<body>
+<!-- 小助手头部 -->
+{block name="header"}{:widget('common/layout/header')}{/block}
+
+<!-- 小助手内容信息 -->
+{block name="main"}主内容{/block}
+
+<!-- 小助手右侧信息 -->
+<div class="top">
+    <p><a class="toped">∧</a></p>
+    <p><a href="#">意见反馈</a></p>
+</div>
+<div class="foot"></div>
+
+<!-- 小助手网站底部 -->
+{include file="common@layout/footer" /}
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+{load href="__STATIC__/js/jquery2.0.3.min.js" /}
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+{load href="__STATIC__/js/bootstrap.min.js" /}
+<!-- 公用特效 -->
+{load href="__STATIC__/js/main.js" /}
+{load href="__ROOT__/plugin/layer/layer.js" /}
+
+{block name="scriptLinks"}{/block}
+{block name="scripts"}{/block}
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!-- 小助手头部 -->
+<header>
+    <!-- 小助手logo -->
+    <div class="container">
+        <div class="row core">
+            <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 col-sm-12">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <img src="__ROOT__{$setting['logo']}" alt="Logo">
+                    </div>
+
+                    {if condition="session('?user.user_id')"}
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="centre clearfix">
+                            <div class="dropdowned portrait pull-right">
+                                <a class="dropdown-toggle portrait_drop" data-toggle="dropdown">
+                                    <img src="__ROOT__{:session('user.user_img')}" class="img-circle portrait_head">
+                                    <b class="caret"></b>
+                                    <span class="portrait-nub img-circle text-center">5</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#"><span>•</span>我的消息</a></li>
+                                    <li><a href="#"><span>•</span>我的学习</a></li>
+                                    <li><a href="#"><span>•</span>我的帖子</a></li>
+                                    <li><a href="#"><span>•</span>我的班级</a></li>
+                                    <li><a href="{:url('index/user/edit',['user_id'=>session('user.user_id')])}"><span>•</span>个人设置</a></li>
+                                    <li><a href="{:url('index/user/logout')}"><span>•</span>安全退出</a></li>
+                                </ul>
+                            </div>
+                            <div class="pull-right">
+                                <h5>学习中心</h5>
+                            </div>
+                        </div>
+                    </div>
+                    {/if}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 小助手导航 -->
+    <div class="container">
+        <div class="row nav">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                <div class="row">
+                    <div class="col-lg-7 col-lg-offset-1 col-md-8 col-sm-8 col-xs-8 main">
+                        <ul class="nav">
+                            {volist name="menu" id="val"}
+                            {empty name="val['_data']"}
+                            <li><a href="{$val['nav_url']}">{$val['nav_name']}</a></li>
+                            {else /}
+                            <li class="dropdownss">
+                                <a class="dropdown-toggle" data-toggle="dropdown">{$val['nav_name']}<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    {volist name="val['_data']" id="vo"}
+                                    <li><a href="{$vo['nav_url']}">{$vo['nav_name']}</a></li>
+                                    {/volist}
+                                </ul>
+                            </li>
+                            {/empty}
+                            {/volist}
+                        </ul>
+                    </div>
+                    <div class="col-lg-2 col-lg-offset-2 col-md-2 col-md-offset-2 col-sm-2 col-sm-offset-2 col-xs-2 col-xs-offset-2">
+                        <div class="search clearfix pull-right">
+                            <input type="text" class="pull-left" name="" placeholder="搜索关键字">
+                            <button style="color: rgb(77, 171, 73);" class="pull-right"><span class="glyphicon glyphicon-search glyphicon-success"></span></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

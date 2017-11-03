@@ -1,0 +1,119 @@
+{extend name="common@layout:base" /}
+{block name="title"}添加基本信息 - {__block__}{/block}
+{block name="styleLinks"}{/block}
+{block name="styles"}{/block}
+
+{block name="main"}
+<a class="btn btn-primary" href="{:url('index')}">
+    <i class="fa fa-list-alt"></i> 列表
+</a>
+<a class="btn btn-success" href="{:url('create')}">
+    <i class="fa fa-plus"></i> 添加
+</a>
+<div class="hr dotted"></div>
+
+<form class="form-horizontal" action="{:url('update',['id'=>$field.id])}" role="form" id="form">
+        <div class="space-4"></div>
+        <div class="form-group">
+            <label class="col-md-2 control-label no-padding-right"> 配置项标题： </label>
+            <div class="col-md-9">
+                <input type="text" class="col-xs-10 col-md-5" name="title" placeholder="中文"
+                       value="{$field.title}"/>
+                <span class="help-inline col-xs-12 col-md-7"><span class="middle red">*</span></span>
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label no-padding-right"> 配置项名称： </label>
+            <div class="col-md-9">
+                <input type="text" class="col-xs-10 col-md-5" name="k" placeholder="英文小写字母"
+                       value="{$field.k}"/>
+                <span class="help-inline col-xs-12 col-md-7"><span class="middle red">*</span></span>
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label no-padding-right"> 类型： </label>
+            <div class="col-md-9">
+                <label class="checkbox-inline">
+                    <input type="radio" class="ace" name="field_type" value="input" onclick="show_field()" {$field.field_type=="input"?"checked":""}/>
+                    <span class="lbl"> input </span>
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" class="ace" name="field_type" value="textarea"
+                           onclick="show_field()" {$field.field_type=="textarea"?"checked":""}/>
+                    <span class="lbl"> textarea </span>
+                </label>
+                <label class="checkbox-inline">
+                    <input type="radio" class="ace" name="field_type" value="radio" onclick="show_field()" {$field.field_type=="radio"?"checked":""}/>
+                    <span class="lbl"> radio </span>
+                </label>
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group field_value">
+            <label class="col-md-2 control-label no-padding-right"> 类型值： </label>
+            <div class="col-md-9">
+                <input type="text" class="col-xs-10 col-md-5" name="field_value"
+                       value="{$field.field_value}"/>
+                <span class="help-inline col-xs-12 col-md-7"><span class="middle red">类型值只有在radio的情况下才需要配置，格式：0|关闭,1|开启</span></span>
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label no-padding-right"> 说明： </label>
+            <div class="col-md-9">
+                <textarea class="col-xs-10 col-md-7" name="tips" rows="5">{$field.tips}</textarea>
+            </div>
+        </div>
+        <div class="space-4"></div>
+
+        <div class="clearfix form-actions">
+            <div class="col-md-offset-2 col-md-9">
+                <input type="hidden" name="id" value="{$field.id}">
+                <button class="btn" type="reset"><i class="fa fa-undo"></i> 重置</button>
+                &nbsp; &nbsp; &nbsp;
+                <button type="button" class="btn btn-info" id="sub-btn"><i class="fa fa-check"></i>
+                    提交
+                </button>
+            </div>
+        </div>
+
+        <div class="hr hr-24"></div>
+    </form>
+{/block}
+{block name="scriptLinks"}{/block}
+{block name="scripts"}
+<script>
+    function show_field() {
+        var type = $("#form").find('input[name="field_type"]:checked').val();
+        if (type == 'radio') {
+            $('.field_value').show();
+        } else {
+            $('.field_value').hide();
+        }
+    }
+    show_field();
+
+    $(function () {
+        $("#sub-btn").on('click', function () {
+            layer.load(2);
+            var form = $("#form");
+            $.post(form.attr('action'), form.serialize(), function (res) {
+                layer.closeAll('loading');
+                if (res.status == 1) {
+                    layer.msg(res.info, {icon: 6, time: 1000}, function () {
+                        window.location.href = res.data['JumpUrl'];
+                    });
+                } else {
+                    layer.msg(res.info, {icon: 5});
+                }
+            }, 'json');
+        });
+    })
+</script>
+{/block}

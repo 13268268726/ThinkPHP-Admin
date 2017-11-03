@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="city">
+    <select class="prov"></select>
+    <select class="city" disabled="disabled"></select>
+    <select class="dist" disabled="disabled"></select>
+</div>
+
+<script type="text/javascript" src="__STATIC__/js/jquery1.7.1.min.js"></script>
+<script type="text/javascript" src="__ROOT__/plugin/city/jquery.cityselect.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#city").citySelect({
+            url:"__ROOT__/plugin/city/city.min.js",
+            prov: "广东",
+            city: "广州市",
+            dist: "白云区",
+            nodata: "none"
+        });
+    })
+</script>
+</body>
+</html>

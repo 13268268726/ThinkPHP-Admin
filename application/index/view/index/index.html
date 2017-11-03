@@ -1,0 +1,2257 @@
+{extend name="common@layout:base" /}
+{block name="title"}首页 - {__block__}{/block}
+
+{block name="header"}{:widget('common/layout/header',['isHomePage'=>1])}{/block}
+{block name="main"}
+<div class="containered">
+    <div id="myCarousela" class="carousel slide bannered">
+        {assign name="bannerNum" value=":count($banner)"}
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+            {for start="0" end="$bannerNum"}
+            {eq name="i" value="0"}
+            <li data-target="#myCarousela" data-slide-to="{i}" class="active"></li>
+            {else/}
+            <li data-target="#myCarousela" data-slide-to="{i}"></li>
+            {/eq}
+            {/for}
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner banner">
+            {volist name="banner" id="val"}
+            {eq name="key" value="0"}
+            <div class="item active">
+                <img src="__ROOT__{$val['banner_url']}" alt="{$val['banner_name']}" style="width:100%;height:25rem;">
+            </div>
+            {else/}
+            <div class="item">
+                <img src="__ROOT__{$val['banner_url']}" alt="{$val['banner_name']}" style="width:100%;height:25rem;">
+            </div>
+            {/eq}
+            {/volist}
+        </div>
+        <!-- 轮播（Carousel）导航 -->
+        <a class="carousel-control left" href="#myCarousela"
+           data-slide="prev"><img src="__STATIC__/images/left.png" alt="">
+        </a>
+        <a class="carousel-control right" href="#myCarousela"
+           data-slide="next"><img src="__STATIC__/images/right.png" alt="">
+        </a>
+        <!-- 轮播 遮罩层-->
+        <div class="shade">
+            <ul class="pull-right">
+                <li><span class="grading h4">等级：未知</span>
+                <li>
+                <li>
+                    <div class="mediad clearfix">
+                        <div class="media-left text-center hour">
+                            <h4>0</h4>
+                            <h4>学分</h4>
+                        </div>
+                        <div class="media-left text-center hour">
+                            <h4>0</h4>
+                            <h4>课时</h4>
+                        </div>
+                        <div class="media-right hour">
+                            <a href="" class="personal">个人中心</a>
+                        </div>
+                    </div>
+
+                </li>
+                <li>
+                    <div class="mediad img-rounded central">
+                        <a href="#" class="media-left">
+                            <img src="__STATIC__/images/red5.png" class="img-circle"/>
+                            <h6 class="text-center">学习中心</h6>
+                        </a>
+                        <a href="#" class="media-left">
+                            <img src="__STATIC__/images/red6.png" class="img-circle"/>
+                            <h6 class="text-center">教师名称</h6>
+                        </a>
+                        <a href="#" class="media-left">
+                            <img src="__STATIC__/images/red7.png" class="img-circle"/>
+                            <h6 class="text-center">教师名称</h6>
+                        </a>
+                    </div>
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <!-- 学习路线模块 -->
+    <div class="route">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    <div class="row">
+                        <div class="routed">
+                            <a href="#">
+                                <div class="col-md-3 col-sm-3 col-xs-3">
+                                    <div class="profile-activity module gather0 clearfix">
+                                        <div>
+                                            <img class="pull-left" alt="Alex Doe's avatar"
+                                                 src="__STATIC__/images/red1.png">
+                                            <p>学习路线</p>
+                                            <div class="time">合理的安排你的学习计划你的学习计划合理的安排你的学习计划你的学习计划</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="col-md-3 col-sm-3 col-xs-3">
+                                    <div class="profile-activity module gather1 clearfix">
+                                        <div>
+                                            <img class="pull-left" alt="Alex Doe's avatar"
+                                                 src="__STATIC__/images/red2.png">
+                                            <p>校区汇总</p>
+                                            <div class="time">合理的安排你的学习计划你的学习计划合理的安排你的学习计划你的学习计划</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="enlist.html">
+                                <div class="col-md-3 col-sm-3 col-xs-3">
+                                    <div class="profile-activity module gather2 clearfix">
+                                        <div>
+                                            <img class="pull-left" alt="Alex Doe's avatar"
+                                                 src="__STATIC__/images/red3.png">
+                                            <p>报名流程</p>
+                                            <div class="time">合理的安排你的学习计划你的学习计划合理的安排你的学习计划你的学习计划</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#">
+                                <div class="col-md-3 col-sm-3 col-xs-3">
+                                    <div class="profile-activity module gather3 clearfix">
+                                        <div>
+                                            <img class="pull-left" alt="Alex Doe's avatar"
+                                                 src="__STATIC__/images/red4.png">
+                                            <p>学习空间</p>
+                                            <div class="time">合理的安排你的学习计划你的学习计划合理的安排你的学习计划你的学习计划</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 视屏分享 -->
+    <div class="line">
+        <div class="container">
+            <div class="row">
+                <!-- 视屏分享模块 -->
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                    <div class="row skill">
+                        <div class="col-md-10 col-sm-10 col-xs-10">
+                            <h3 class="partake">
+                                <span class="span5">
+                                    <label class="inline">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            {assign name="mvTypeShareId" value="1" /}
+                                            {assign name="mvTypeShare" value="$mvType[$mvTypeShareId]" /}
+                                            <li class="partakes"><span>{$mvTypeShare['mv_type_name']}</span></li>
+
+                                            {volist name="mvTypeShare['_data']" id="val"}
+                                            <li role="presentation" class="{$i==0?'active':''}">
+                                                <a href="#Section{$val['mv_type_id']}" aria-controls="{$ariaControls[$i] ?? ''}"
+                                                   role="tab" data-toggle="tab"><span>{$val['mv_type_name']}</span></a>
+                                            </li>
+                                            {/volist}
+                                        </ul>
+                                    </label>
+                                    <label class="pull-right inlineed">
+                                        <a href="">查看更多</a>
+                                    </label>
+                                </span>
+                            </h3>
+                            <div class="tab-content tabs">
+                                {present name="mvInfo[$mvTypeShareId]"}
+                                {assign name="isActive" value="1" /}
+                                {volist name="mvInfo[$mvTypeShareId]" id="val1"}
+                                <div role="tabpanel" class="tab-pane fade{$isActive?' in active':''}" id="Section{$key}">
+                                    <div class="row">
+
+                                        {volist name="val1" id="val2" offset="0" length="3"}
+                                        <div class="col-md-4">
+                                            <!--轮播（Carousel）项目分类-->
+                                            <div class="media img-rounded share">
+                                                <a href="#" class="media-middle media-bottom">
+                                                    <img src="__ROOT__{$val2.mv_img}" class="img"/>
+                                                </a>
+                                                <div class="media-middle">
+                                                    <h4 class="media-heading artifice">{$val2.mv_title}</h4>
+                                                    <p class="row-fluid">
+                                                        <span class="span5">小土豆 &nbsp&nbsp&nbsp|</span>
+                                                        <span class="span2">{$val2.mv_minute}分钟</span>
+                                                        <span class="span2">
+                                                            <label class="pull-right">&nbsp;&nbsp;&nbsp;{$val2.mv_view}</label>
+                                                        </span>
+                                                        <span class="span3">
+                                                                <label class="pull-right">
+                                                                    <img src="__STATIC__/images/bo.jpg" alt=""
+                                                                         width="100%">
+                                                                </label>
+                                                            </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {assign name="isActive" value="0" /}
+                                        {/volist}
+
+                                        <!--<div class="col-md-4">
+                                            &lt;!&ndash; 轮播（Carousel）项目分类 &ndash;&gt;
+                                            <div class="media img-rounded share">
+                                                <a href="#" class="media-middle media-bottom">
+                                                    <img src="__STATIC__/images/01.png" class="img"/>
+                                                </a>
+                                                <div class="media-middle">
+                                                    <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                    <p class="row-fluid">
+                                                        <span class="span5">小土豆 &nbsp&nbsp&nbsp|</span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span2">10分钟</span>
+                                                        <span class="span2">
+                                                                <label class="pull-right">
+                                                                &nbsp&nbsp&nbsp5225555</label>
+                                                                </span>&lt;!&ndash; /span &ndash;&gt;
+
+                                                        <span class="span3">
+                                                                <label class="pull-right">
+                                                                    <img src="__STATIC__/images/bo.jpg" alt=""
+                                                                         width="100%">
+                                                                </label>
+                                                            </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            &lt;!&ndash; 轮播（Carousel）项目分类 &ndash;&gt;
+                                            <div class="media img-rounded share">
+                                                <a href="#" class="media-middle media-bottom">
+                                                    <img src="__STATIC__/images/01.png" class="img"/>
+                                                </a>
+                                                <div class="media-middle">
+                                                    <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                    <p class="row-fluid">
+                                                        <span class="span5">小土豆 &nbsp&nbsp&nbsp|</span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span2">10分钟</span>
+                                                        <span class="span2">
+                                                                <label class="pull-right">
+                                                                &nbsp&nbsp&nbsp5225555</label>
+                                                                </span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span3">
+                                                                <label class="pull-right">
+                                                                    <img src="__STATIC__/images/bo.jpg" alt=""
+                                                                         width="100%">
+                                                                </label>
+                                                            </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+
+                                {/volist}
+                                {/present}
+
+                                <!--<div role="tabpanel" class="tab-pane fade" id="Section2">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            &lt;!&ndash; 轮播（Carousel）项目分类 &ndash;&gt;
+                                            <div class="media img-rounded share">
+                                                <a href="#" class="media-middle media-bottom">
+                                                    <img src="__STATIC__/images/02.png" class="img"/>
+                                                </a>
+                                                <div class="media-middle">
+                                                    <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                    <p class="row-fluid">
+                                                        <span class="span5">小土豆 &nbsp&nbsp&nbsp|</span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span2">10分钟</span>
+                                                        <span class="span2">
+                                                                <label class="pull-right">
+                                                                &nbsp&nbsp&nbsp5225555</label>
+                                                                </span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span3">
+                                                                <label class="pull-right">
+                                                                    <img src="__STATIC__/images/bo.jpg" alt=""
+                                                                         width="100%">
+                                                                </label>
+                                                            </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            &lt;!&ndash; 轮播（Carousel）项目分类 &ndash;&gt;
+                                            <div class="media img-rounded share">
+                                                <a href="#" class="media-middle media-bottom">
+                                                    <img src="__STATIC__/images/02.png" class="img"/>
+                                                </a>
+                                                <div class="media-middle">
+                                                    <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                    <p class="row-fluid">
+                                                        <span class="span5">小土豆 &nbsp&nbsp&nbsp|</span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span2">10分钟</span>
+                                                        <span class="span2">
+                                                                <label class="pull-right">
+                                                                &nbsp&nbsp&nbsp5225555</label>
+                                                                </span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span3">
+                                                                <label class="pull-right">
+                                                                    <img src="__STATIC__/images/bo.jpg" alt=""
+                                                                         width="100%">
+                                                                </label>
+                                                            </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            &lt;!&ndash; 轮播（Carousel）项目分类 &ndash;&gt;
+                                            <div class="media img-rounded share">
+                                                <a href="#" class="media-middle media-bottom">
+                                                    <img src="__STATIC__/images/02.png" class="img"/>
+                                                </a>
+                                                <div class="media-middle">
+                                                    <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                    <p class="row-fluid">
+                                                        <span class="span5">小土豆 &nbsp&nbsp&nbsp|</span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span2">10分钟</span>
+                                                        <span class="span2">
+                                                                <label class="pull-right">
+                                                                &nbsp&nbsp&nbsp5225555</label>
+                                                                </span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span3">
+                                                                <label class="pull-right">
+                                                                    <img src="__STATIC__/images/bo.jpg" alt=""
+                                                                         width="100%">
+                                                                </label>
+                                                            </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="Section3">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="media img-rounded share">
+                                                <a href="#" class="media-middle media-bottom">
+                                                    <img src="__STATIC__/images/03.png" class="img"/>
+                                                </a>
+                                                <div class="media-middle">
+                                                    <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                    <p class="row-fluid">
+                                                        <span class="span5">小土豆 &nbsp&nbsp&nbsp|</span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span2">10分钟</span>
+                                                        <span class="span2">
+                                                                <label class="pull-right">
+                                                                &nbsp&nbsp&nbsp5225555</label>
+                                                                </span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span3">
+                                                                <label class="pull-right">
+                                                                    <img src="__STATIC__/images/bo.jpg" alt=""
+                                                                         width="100%">
+                                                                </label>
+                                                            </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            &lt;!&ndash; 轮播（Carousel）项目分类 &ndash;&gt;
+                                            <div class="media img-rounded share">
+                                                <a href="#" class="media-middle media-bottom">
+                                                    <img src="__STATIC__/images/03.png" class="img"/>
+                                                </a>
+                                                <div class="media-middle">
+                                                    <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                    <p class="row-fluid">
+                                                        <span class="span5">小土豆 &nbsp&nbsp&nbsp|</span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span2">10分钟</span>
+                                                        <span class="span2">
+                                                                <label class="pull-right">
+                                                                &nbsp&nbsp&nbsp5225555</label>
+                                                                </span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span3">
+                                                                <label class="pull-right">
+                                                                    <img src="__STATIC__/images/bo.jpg" alt=""
+                                                                         width="100%">
+                                                                </label>
+                                                            </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            &lt;!&ndash; 轮播（Carousel）项目分类 &ndash;&gt;
+                                            <div class="media img-rounded share">
+                                                <a href="#" class="media-middle media-bottom">
+                                                    <img src="__STATIC__/images/03.png" class="img"/>
+                                                </a>
+                                                <div class="media-middle">
+                                                    <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                    <p class="row-fluid">
+                                                        <span class="span5">小土豆 &nbsp&nbsp&nbsp|</span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span2">10分钟</span>
+                                                        <span class="span2">
+                                                                <label class="pull-right">
+                                                                &nbsp&nbsp&nbsp5225555</label>
+                                                                </span>&lt;!&ndash; /span &ndash;&gt;
+                                                        <span class="span3">
+                                                                <label class="pull-right">
+                                                                    <img src="__STATIC__/images/bo.jpg" alt=""
+                                                                         width="100%">
+                                                                </label>
+                                                            </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-2">
+                            <div class="affiched">
+                                <h3 class="affiche"><span class="span7 ">资讯公告</span><!-- /span --></h3>
+                                <ul class="affichenav">
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                    <li><a href=""><span>•</span>新闻资讯新闻资讯新闻资讯</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 资讯公告模块 -->
+
+            </div>
+        </div>
+    </div>
+    <!-- 在线课程内容 -->
+    <div class="line">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    <h3 class="partake">
+                            <span class="span5">
+                                <label class="inline">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        {assign name="mvTypeOnlineId" value="2" /}
+                                        {assign name="mvTypeOnline" value="$mvType[$mvTypeOnlineId]" /}
+                                        <?php $class = ['slide-onec','slide-twoc','slide-threec']; ?>
+                                        <li class="partakes"><span>{$mvTypeOnline['mv_type_name']}</span></li>
+                                        {volist name="mvTypeOnline['_data']" id="val"}
+                                        <li role="presentation" class="{$i==0?'active':'presentation'} {$class[$i-1]}">
+                                            <a data-toggle="tab"><span>{$val['mv_type_name']}</span></a>
+                                        </li>
+                                        {/volist}
+                                    </ul>
+
+                                    <!--<ul class="nav nav-tabs" role="tablist">
+                                        <li class="partakes"><span>在线课程</span></li>
+                                        <li class="active slide-onec"><a data-toggle="tab"><span>课程名称</span></a></li>
+                                        <li class="presentation slide-twoc"><a data-toggle="tab"><span>课程名称&#45;&#45;2</span></a></li>
+                                        <li class="presentation slide-threec"><a data-toggle="tab"><span>课程名称&#45;&#45;3</span></a></li>
+                                    </ul>-->
+                                </label>
+                                <label class="pull-right inlineed">
+                                    <a href="">查看更多</a>
+                                </label>
+                            </span>
+                    </h3>
+                    <div id="myCarouselc" class="carousel slide">
+                        <!-- 轮播（Carousel）项目 -->
+                        <div class="carousel-inner">
+
+                            {present name="mvInfo[$mvTypeOnlineId]"}
+                            {assign name="isActive" value="1" /}
+                            {volist name="mvInfo[$mvTypeOnlineId]" id="val1"}
+
+                            {assign name="firstMvOnline" value="$val1[0]"}
+                            <div class="item{$isActive?' active':''}">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="media img-rounded share">
+                                            <a href="#" class="media-middle media-bottom">
+                                                <img src="__ROOT__{$firstMvOnline['mv_img']}" class="img" height="305rem"/>
+                                            </a>
+                                            <div class="media-middle">
+                                                <h4 class="media-heading artifice">{$firstMvOnline['mv_title']}</h4>
+                                                <p>{$firstMvOnline['mv_desc']}</p>
+                                                <p class="row-fluid">
+                                                    <span class="span5">0学分 &nbsp&nbsp&nbsp</span>
+                                                    <span class="span2">0课时</span>
+                                                    <span class="span2">
+                                                            <label class="pull-right">
+                                                            &nbsp;&nbsp;&nbsp;{$firstMvOnline['mv_view']}</label>
+                                                            </span>
+                                                    <span class="span3">
+                                                            <label class="pull-right">
+                                                                <img src="__STATIC__/images/ren.png" alt=""
+                                                                     width="100%">
+                                                            </label>
+                                                        </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="row">
+
+
+                                            {volist name="val1" id="val2" offset="1" length="6"}
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__ROOT__{$val2['mv_img']}" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">{$val2['mv_title']}</h4>
+                                                        <p>{$val2['mv_desc']}</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp;&nbsp;&nbsp;|</span>
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp;&nbsp;&nbsp;{$val2['mv_view']}</label>
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/volist}
+
+
+                                            <!--<div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            {assign name="isActive" value="0" /}
+                            {/volist}
+                            {/present}
+
+
+                            <!--<div class="item active">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="media img-rounded share">
+                                            <a href="#" class="media-middle media-bottom">
+                                                <img src="__STATIC__/images/01.png" class="img" height="305rem"/>
+                                            </a>
+                                            <div class="media-middle">
+                                                <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                <p>3D镭射板知识镭射板知识</p>
+                                                <p class="row-fluid">
+                                                    <span class="span5">0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                    <span class="span2">0课时</span>
+                                                    <span class="span2">
+                                                            <label class="pull-right">
+                                                            &nbsp&nbsp&nbsp5225555</label>
+                                                            </span>&lt;!&ndash; /span &ndash;&gt;
+                                                    <span class="span3">
+                                                            <label class="pull-right">
+                                                                <img src="__STATIC__/images/ren.png" alt=""
+                                                                     width="100%">
+                                                            </label>
+                                                        </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="media img-rounded share">
+                                            <a href="#" class="media-middle media-bottom">
+                                                <img src="__STATIC__/images/02.png" class="img" height="305rem"/>
+                                            </a>
+                                            <div class="media-middle">
+                                                <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                <p>3D镭射板知识镭射板知识</p>
+                                                <p class="row-fluid">
+                                                    <span class="span5">0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                    <span class="span2">0课时</span>
+                                                    <span class="span2">
+                                                            <label class="pull-right">
+                                                            &nbsp&nbsp&nbsp5225555</label>
+                                                            </span>&lt;!&ndash; /span &ndash;&gt;
+                                                    </span>
+                                                    <span class="span3">
+                                                            <label class="pull-right">
+                                                                <img src="__STATIC__/images/ren.png" alt=""
+                                                                     width="100%">
+                                                            </label>
+                                                        </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/02.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/02.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/02.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/02.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="media img-rounded share">
+                                            <a href="#" class="media-middle media-bottom">
+                                                <img src="__STATIC__/images/03.png" class="img" height="305rem"/>
+                                            </a>
+                                            <div class="media-middle">
+                                                <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                <p>3D镭射板知识镭射板知识</p>
+                                                <p class="row-fluid">
+                                                    <span class="span5">0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                    <span class="span2">0课时</span>
+                                                    <span class="span2">
+                                                            <label class="pull-right">
+                                                            &nbsp&nbsp&nbsp5225555</label>
+                                                            </span>&lt;!&ndash; /span &ndash;&gt;
+                                                    </span>
+                                                    <span class="span3">
+                                                            <label class="pull-right">
+                                                                <img src="__STATIC__/images/ren.png" alt=""
+                                                                     width="100%">
+                                                            </label>
+                                                        </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/03.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/03.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/03.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/01.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">3D镭射板知识镭射板知识</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="media img-rounded share">
+                                                    <a href="#" class="media-middle media-bottom">
+                                                        <img src="__STATIC__/images/03.png" class="img"/>
+                                                    </a>
+                                                    <div class="media-middle">
+                                                        <h4 class="media-heading artifice">2020设计小技巧</h4>
+                                                        <p>3D镭射板知识镭射板知识</p>
+                                                        <p class="row-fluid">
+                                                            <span class="span5">0学分 &nbsp&nbsp&nbsp|</span>
+                                                            &lt;!&ndash; /span &ndash;&gt;
+                                                            <span class="span2">0课时</span>
+                                                            <span class="span2">
+                                                                    <label class="pull-right">
+                                                                    &nbsp&nbsp&nbsp5225555</label>
+                                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                                            </span>
+                                                            <span class="span3">
+                                                                    <label class="pull-right">
+                                                                        <img src="__STATIC__/images/ren.png" alt=""
+                                                                             width="100%">
+                                                                    </label>
+                                                                </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 精品微课内容 -->
+    <div class="line">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    <h3 class="partake">
+                            <span class="span5">
+                                <label class="inline">
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        {assign name="mvTypeBestId" value="3" /}
+                                        {assign name="mvTypeBest" value="$mvType[$mvTypeBestId]" /}
+                                        <?php $class = ['slide-onec','slide-twoc','slide-threec']; ?>
+                                        <li class="partakes"><span>{$mvTypeBest['mv_type_name']}</span></li>
+                                        {volist name="$mvTypeBest['_data']" id="val"}
+                                        <li role="presentation" class="{$i==0?'active':''}">
+                                            <a href="#Section{$val['mv_type_id']}" aria-controls="{$ariaControls[$i] ?? ''}"
+                                                role="tab" data-toggle="tab"><span>{$val['mv_type_name']}</span></a>
+                                        </li>
+                                        {/volist}
+                                    </ul>
+
+                                    <!--<ul class="nav nav-tabs" role="tablist">
+                                        <li class="partakes"><span>精品微课</span></li>
+                                        <li role="presentation" class="active"><a href="#Section4" aria-controls="home"
+                                                                                  role="tab" data-toggle="tab"><span>课程名称</span></a></li>
+                                        <li role="presentation"><a href="#Section5" aria-controls="profile" role="tab"
+                                                                   data-toggle="tab"><span>课程名称-2</span></a></li>
+                                        <li role="presentation"><a href="#Section6" aria-controls="messages" role="tab"
+                                                                   data-toggle="tab"><span>课程名称-3</span></a></li>
+                                    </ul>-->
+                                </label>
+                                <label class="pull-right inlineed">
+                                    <a href="">查看更多</a>
+                                </label>
+                            </span>
+                    </h3>
+
+                    <div class="tab-content tabs">
+
+
+                        {present name="mvInfo[$mvTypeBestId]"}
+                        {assign name="isActive" value="1" /}
+                        {volist name="mvInfo[$mvTypeBestId]" id="val1"}
+                        <div role="tabpanel" class="tab-pane fade{$isActive?' in active':''}" id="Section{$key}">
+                            <div class="row">
+
+
+                                {volist name="val1" id="val2" offset="0" length="8"}
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__ROOT__{$val2.mv_img}" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">{$val2['mv_title']}</h4>
+                                            <p class="genre">#{$val2['mv_keywords']}#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp;&nbsp;&nbsp;</span>
+                                                <span>0课时 &nbsp;&nbsp;</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>{$val2['mv_view']}</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                {/volist}
+                            </div>
+                        </div>
+                        {assign name="isActive" value="0" /}
+                        {/volist}
+                        {/present}
+                        <!--<div role="tabpanel" class="tab-pane fade in active" id="Section4">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <!--<div role="tabpanel" class="tab-pane fade" id="Section5">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/02.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/02.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/02.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/02.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="Section6">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/03.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/03.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/03.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/03.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/03.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="media img-rounded share">
+                                        <a href="#" class="media-middle media-bottom">
+                                            <img src="__STATIC__/images/01.png" class="img"/>
+                                        </a>
+                                        <div class="media-middle">
+                                            <h4 class="media-heading artifice">3D镭射板知识及卖点及卖点</h4>
+                                            <p class="genre">#课程类别名称#</p>
+                                            <p class="row-fluid">
+                                                <span>0学分 &nbsp&nbsp&nbsp</span>&lt;!&ndash; /span &ndash;&gt;
+                                                <span>0课时 &nbsp&nbsp</span>
+                                                <span class="span2"><img src="__STATIC__/images/ren.png" alt=""></span>
+                                                <span>55555</span>
+
+                                                <span class="span3">
+                                                        <label class="pull-right"><button>观看课程</button></label>
+                                                    </span>&lt;!&ndash; /span &ndash;&gt;
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 讲师简历 -->
+    <div class="container">
+        <div class="row">
+            <!-- 视屏分享模块 -->
+            <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                <h3>
+                    <span class="span7">讲师简历</span><!-- /span -->
+                    <span class="span5">
+                            <label class="pull-right inline">
+                                <div class="btn-group" data-toggle="buttons-checkbox">
+                                    <button class="btn prev-slided"><</button>
+                                    <button class="btn next-slided">></button>
+                                </div>
+                            </label>
+                        </span>
+                </h3>
+                <div id="myCarouselbd" class="carousel slide">
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner">
+                        {volist name="teacher" id="tch"}
+                        {if condition="$key % 4 == 0"}
+                        {eq name="key" value="0"}
+                        <div class="item active">{else/}
+                            <div class="item">{/eq}
+                                <div class="row">
+                                    {/if}
+                                    <div class="col-md-3 col-sm-3 col-xs-3">
+                                        <div class="media img-rounded resume lector{$key%4}">
+                                            <a href="#" class="media-left">
+                                                <img src="__ROOT__{$tch['avatar']}" class="img-circle"/>
+                                                <h5 class="text-center">{$tch['name']}</h5>
+                                            </a>
+                                            <div class="media-left">
+                                                <h4 class="media-heading">{$tch['job']}</h4>
+                                                <p>{$tch['desc']|str_cut=0,46}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {if condition="$key % 4 == 3"}
+                                </div>
+                            </div>
+                            {/if}
+                            {/volist}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 排行榜内容 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <h3>
+                                <span class="span7">学习课时排行榜</span><!-- /span -->
+                            </h3>
+                            <div class="mediad">
+                                <a href="#" class="media-left ranking">
+                                    <span class="to">1</span>
+                                    <img src="__STATIC__/images/ji.jpg" class="img-circle"/>
+                                </a>
+                                <div class="media-left charts">
+                                    <p class="text-left">姓名</p>
+                                    <h4 class="text-right">学完<span>154</span>课时</h4>
+                                    <p class="text-left">店面名称</p>
+                                </div>
+                            </div>
+                            <ul class="chartst">
+                                <li><span class="btn btn-warn btn-xs">2</span><span class="span3">姓名</span><span
+                                        class="span4">店铺名称</span><span class="span4 text-right">学完<b>110</b>课时</span>
+                                </li>
+                                <li><span class="btn btn-yell btn-xs">3</span><span class="span3">姓名</span><span
+                                        class="span4">店铺名称</span><span class="span4 text-right">学完<b>110</b>课时</span>
+                                </li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <h3>
+                                <span class="span7">部分学分排行榜</span><!-- /span -->
+                            </h3>
+                            <div class="mediad ">
+                                <a href="#" class="media-left ranking">
+                                    <span class="to">1</span>
+                                    <img src="__STATIC__/images/ji.jpg" class="img-circle"/>
+                                </a>
+                                <div class="media-left charts">
+                                    <p class="text-left">部门名称</p>
+                                    <h4 class="text-right"><span>63</span>学分</h4>
+                                </div>
+                            </div>
+                            <ul class="chartst">
+                                <li><span class="btn btn-warn btn-xs">2</span><span class="span3">姓名</span><span
+                                        class="span4">店铺名称</span><span class="span4 text-right">学完<b>110</b>课时</span>
+                                </li>
+                                <li><span class="btn btn-yell btn-xs">3</span><span class="span3">姓名</span><span
+                                        class="span4">店铺名称</span><span class="span4 text-right">学完<b>110</b>课时</span>
+                                </li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4 col-sm-4 col-xs-4">
+                            <h3>
+                                <span class="span7">问题交流排行榜</span><!-- /span -->
+                            </h3>
+                            <div class="mediad">
+                                <a href="#" class="media-left ranking">
+                                    <span class="to">1</span>
+                                    <img src="__STATIC__/images/ji.jpg" class="img-circle"/>
+                                </a>
+                                <div class="media-left charts">
+                                    <p class="text-left">如何降低设计的出错率</p>
+                                    <h4 class="text-right">&nbsp</h4>
+                                    <p class="text-left"><span>7</span>条回复</p>
+                                </div>
+                            </div>
+                            <ul class="chartst">
+                                <li><span class="btn btn-warn btn-xs">2</span><span class="span3">姓名</span><span
+                                        class="span4">店铺名称</span><span class="span4 text-right">学完<b>110</b>课时</span>
+                                </li>
+                                <li><span class="btn btn-yell btn-xs">3</span><span class="span3">姓名</span><span
+                                        class="span4">店铺名称</span><span class="span4 text-right">学完<b>110</b>课时</span>
+                                </li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                                <li><span class="btn btn-xs">4</span><span class="span3">姓名</span><span class="span4">店铺名称</span><span
+                                        class="span4 text-right">学完<b>110</b>课时</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{/block}

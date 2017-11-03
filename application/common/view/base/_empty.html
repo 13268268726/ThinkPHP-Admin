@@ -1,0 +1,18 @@
+{extend name="common@layout:base" /}
+{block name="title"}出错了~~ {/block}
+
+{block name="styles"}
+<style>
+    .containered h3{
+        color: #ff0000;
+    }
+</style>
+{/block}
+
+{block name="header"}{:widget('common/layout/header',['isHomePage'=>1])}{/block}
+
+{block name="main"}
+<div class="containered">
+    <h3>{$info}</h3>
+</div>
+{/block}

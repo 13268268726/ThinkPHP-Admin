@@ -1,0 +1,322 @@
+{extend name="common@layout:base" /}
+{block name="title"}修改管理员 - {__block__}{/block}
+{block name="styleLinks"}
+{load href="__ROOT__/admin/static/css/bootstrap-duallistbox.min.css" /}
+{/block}
+
+{block name="styles"}
+<style>
+    .avatar-ul {
+        list-style: none;
+        margin: 0 0 0 20px;
+        padding: 0;
+    }
+
+    .avatar-ul li {
+        width: 100px;
+        float: left;
+        overflow: hidden;
+        margin: 2px;
+        border: 1px solid #999;
+    }
+
+    .avatar-ul li img {
+        margin: 0 auto;
+        display: block;
+    }
+
+    .avatar-ul li label {
+        margin-top: 10px;
+        margin-left: 10px;
+        display: block;
+    }
+</style>
+{/block}
+
+{block name="main"}
+<a class="btn btn-primary" href="{:url('index')}">
+    <i class="fa fa-list-alt"></i> 列表
+</a>
+<a class="btn btn-success" href="{:url('create')}">
+    <i class="fa fa-plus"></i> 添加
+</a>
+<a class="btn btn-info" a href="#" onclick="javascript:history.back(-1);">
+    <i class="fa fa-undo"></i> 返回
+</a>
+<div class="hr dotted"></div>
+<div class="tabbable">
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active">
+            <a data-toggle="tab" href="#base">
+                <i class="green fa fa-cogs bigger-110"></i>
+                基本信息设置
+            </a>
+        </li>
+
+        <li>
+            <a data-toggle="tab" href="#repwd">
+                <i class="green fa fa-cog bigger-110"></i>
+                密码重置
+            </a>
+        </li>
+
+        <li>
+            <a data-toggle="tab" href="#avatar">
+                <i class="green fa fa-user bigger-110"></i>
+                选择头像
+            </a>
+        </li>
+
+        <li>
+            <a data-toggle="tab" href="#group">
+                <i class="green fa fa-user-md bigger-110"></i>
+                安排管理组
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="base" class="tab-pane in active">
+            <form class="form-horizontal form" role="form"
+                  action="{:url('update',get_current(['id'=>$field.admin_id]))}">
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding-right"> 账号： </label>
+
+                    <div class="col-md-9">
+                        <input type="text" class="col-xs-10 col-md-5" placeholder="请输入账号"
+                               name="admin_name"
+                               value="{$field.admin_name}"/>
+                        <span class="help-inline col-xs-12 col-md-7"> <span class="middle red">*</span> </span>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding-right"> 邮箱： </label>
+
+                    <div class="col-md-9">
+                        <input type="text" class="col-xs-10 col-md-5" placeholder="请输入邮箱地址"
+                               name="admin_email"
+                               value="{$field.admin_email}"/>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding-right"> 性别： </label>
+                    <div class="col-md-9">
+                        <label class="checkbox-inline">
+                            <input type="radio" class="ace" name="admin_sex" value="0"
+                                   {$field.admin_sex==0?'checked':''}/>
+                            <span class="lbl"> 女 </span>
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="radio" class="ace" name="admin_sex" value="1"
+                                   {$field.admin_sex==1?'checked':''}/>
+                            <span class="lbl"> 男 </span>
+                        </label>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding-right"> 状态： </label>
+                    <div class="col-md-3">
+                        <select class="input-medium" name="admin_state">
+                            <option value="0">--请选择状态--</option>
+                            <option value="1" {$field.admin_state==1?'selected':''}> 正常</option>
+                            <option value="2" {$field.admin_state==2?'selected':''}> 锁定</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-2 col-md-9">
+                        <input type="hidden" name="admin_id" value="{$field.admin_id}">
+                        <input type="hidden" name="SubType" value="1">
+                        <button type="reset" class="btn"><i class="icon-undo bigger-110"></i> 重置
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button type="button" class="btn btn-info sub-btn"><i
+                                class="icon-ok bigger-110"></i>
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="repwd" class="tab-pane">
+            <form class="form-horizontal form" role="form"
+                  action="{:url('update',get_current(['id'=>$field.admin_id]))}">
+
+                <div class="space-4"></div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding-right">
+                        密码： </label>
+                    <div class="col-md-9">
+                        <input type="password" class="col-xs-10 col-md-5" placeholder="请输入密码"
+                               name="admin_pwd"/>
+                        <span class="help-inline col-xs-12 col-md-7"> <span class="middle red">*</span> </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding-right">
+                        确认密码： </label>
+                    <div class="col-md-9">
+                        <input type="password" class="col-xs-10 col-md-5" placeholder="请输入确认密码"
+                               name="repassword"/>
+                        <span class="help-inline col-xs-12 col-md-7"> <span class="middle red">*</span> </span>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-2 col-md-9">
+                        <input type="hidden" name="admin_id" value="{$field.admin_id}">
+                        <input type="hidden" name="SubType" value="2">
+                        <button type="button" class="btn btn-info sub-btn">
+                            <i class="icon-ok bigger-110"></i> 提交
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="avatar" class="tab-pane">
+            <form class="form-horizontal form" role="form"
+                  action="{:url('update',get_current(['id'=>$field.admin_id]))}">
+                <div class="form-group">
+                    <ul class="avatar-ul">
+                        {eq name="$field.admin_sex" value="1"}
+                        {for start="1" end="6"}
+                        <?php $bImg="/admin/avatars/b_".$i.".png"; ?>
+                        <li>
+                            <img src="__ROOT__{$bImg}" alt="">
+                            <label>
+                                <input type="radio" class="ace" name="admin_img" value="{$bImg}" {$field.admin_img==$bImg?'checked':''}>
+                                <span class="lbl">男生头像{$i}</span>
+                            </label>
+                        </li>
+                        {/for}
+                        {else/}
+
+                        {for start="1" end="6"}
+                        <?php $gImg="/admin/avatars/g_".$i.".png"; ?>
+                        <li>
+                            <img src="__ROOT__{$gImg}" alt="女生头像{$i}">
+                            <label>
+                                <input type="radio" class="ace" name="admin_img" value="{$gImg}" {$field.admin_img==$gImg?'checked':''}>
+                                <span class="lbl">女生头像{$i}</span>
+                            </label>
+                        </li>
+                        {/for}
+                        {/eq}
+                    </ul>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-2 col-md-9">
+                        <input type="hidden" name="admin_id" value="{$field.admin_id}">
+                        <input type="hidden" name="SubType" value="3">
+                        <button type="button" class="btn btn-info sub-btn"><i
+                                class="icon-ok bigger-110"></i>
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="group" class="tab-pane">
+            <form class="form-horizontal form" role="form"
+                  action="{:url('changeGroupApi',get_current(['id'=>$field.admin_id]))}">
+                <div class="space-4"></div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <div class="bootstrap-duallistbox-container row moveonselect">
+                            <div class="col-md-6">
+                                <strong>未选中分组</strong>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>已选中分组</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label no-padding-top" for="group-list"> 选择分组 </label>
+                    <div class="col-md-8">
+                        <select multiple="multiple" size="10" name="group_list[]" id="group-list">
+                            {foreach name="GroupData" item="v"}
+                            {in name="v['id']" value="$fieldGroupData" }
+                            <option value="{$v['id']}" selected="selected">{$v['title']}</option>
+                            {else/}
+                            <option value="{$v['id']}">{$v['title']}</option>
+                            {/in}
+                            {/foreach}
+                        </select>
+
+                        <div class="hr hr-16 hr-dotted"></div>
+                    </div>
+                </div>
+                <div class="space-4"></div>
+
+                <div class="clearfix form-actions">
+                    <div class="col-md-offset-2 col-md-9">
+                        <input type="hidden" name="admin_id" value="{$field.admin_id}">
+                        <input type="hidden" name="SubType" value="4">
+                        <button type="button" class="btn btn-info sub-btn">
+                            <i class="icon-ok bigger-110"></i>
+                            提交
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="scriptLinks"}
+{load href="__ROOT__/admin/static/js/jquery.bootstrap-duallistbox.min.js" /}
+{/block}
+
+{block name="scripts"}
+<script>
+    var group_box = $('select[name="group_list[]"]').bootstrapDualListbox({
+        selectorMinimalHeight: '200',
+        filterTextClear: '显示全部',
+        moveAllLabel: '选择分组',
+        removeAllLabel: '删除所有',
+        moveSelectedLabel: '移除所有分组',
+        filterPlaceHolder: '查询',
+        infoText: '分组个数：{0}',
+        infoTextFiltered: '<span class="label label-warning">没有查询到数据</span> {0} from {1}',
+        infoTextEmpty: '没有分组了'
+    });
+
+    $(function () {
+        $(".sub-btn").on('click', function () {
+            layer.load(2);
+            var formObj = $(this).parents('.form');
+            var AddApi = formObj.attr('action');
+            var json = formObj.serialize();
+            $.post(AddApi, json, function (res) {
+                layer.closeAll('loading');
+                if (res.status == 1) {
+                    layer.msg(res.info, {icon: 6, time: 1000}, function () {
+//                        window.location.href = res.data['JumpUrl'];
+                    });
+                } else {
+                    layer.msg(res.info, {icon: 5});
+                }
+            }, 'json');
+        });
+    })
+</script>
+{/block}

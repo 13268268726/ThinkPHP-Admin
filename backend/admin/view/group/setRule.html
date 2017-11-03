@@ -1,0 +1,35 @@
+{extend name="common@layout:base" /}
+{block name="title"}管理员分组分配权限 - {__block__}{/block}
+{block name="styleLinks"}{/block}
+{block name="styles"}{/block}
+{block name="pageHeader"}
+{:widget('common/Layout/pageHeader',['tit'=>'为<span style="color:#ff0000">'.$group_data['title'].'</span>分配权限'])}
+{/block}
+{block name="main"}
+<button class="btn btn-success" onclick="javascript:history.back(-1);">
+    <i class="ace-icon fa fa-undo"></i>返回
+</button>
+<div class="hr dotted"></div>
+
+{notempty name="table"}
+<form action="{:url('setRuleApi')}" method="post">
+    <input type="hidden" name="id" value="{$group_data['id']}">
+    {$table}
+</form>
+<div class="hr dotted"></div>
+{else/}
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times; </button>
+    没有查询到数据记录
+</div>
+{/notempty}
+
+{/block}
+{block name="scriptLinks"}{/block}
+{block name="scripts"}
+<script>
+    function checkAll(obj) {
+        $(obj).parents('.b-group').eq(0).find("input[type='checkbox']").prop('checked', $(obj).prop('checked'));
+    }
+</script>
+{/block}

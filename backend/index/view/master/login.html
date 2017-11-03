@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta charset="utf-8"/>
+    <title>登录 - 智助通</title>
+
+    <meta name="description" content="User login page"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+
+    <!-- bootstrap & fontawesome -->
+    <!--<link rel="stylesheet" href="__ROOT__/admin/static/css/bootstrap.min.css"/>-->
+    <!--<link rel="stylesheet" href="__ROOT__/admin/static/font-awesome/4.5.0/css/font-awesome.min.css"/>-->
+    {load href="__ROOT__/admin/static/css/bootstrap.min.css,__ROOT__/admin/static/font-awesome/4.5.0/css/font-awesome.min.css" /}
+
+    <!-- text fonts -->
+    {css href="__ROOT__/admin/static/css/fonts.googleapis.com.css" /}
+
+    <!-- ace styles -->
+    {css href="__ROOT__/admin/static/css/ace.min.css" /}
+
+    <!--[if lte IE 9]>
+    {css href="__ROOT__/admin/static/css/ace-part2.min.css" /}
+    <![endif]-->
+    {css href="__ROOT__/admin/static/css/ace-rtl.min.css" /}
+
+    <!--[if lte IE 9]>
+    {css href="__ROOT__/admin/static/css/ace-ie.min.css" /}
+    <![endif]-->
+
+    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+
+    <!--[if lte IE 8]>
+    {load href="__ROOT__/admin/static/js/html5shiv.min.js,__ROOT__/admin/static/js/respond.min.js" /}
+    <![endif]-->
+</head>
+
+<body class="login-layout light-login">
+<div class="main-container">
+    <div class="main-content">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="login-container">
+                    <div class="center">
+                        <h1>
+                            <i class="ace-icon fa fa-leaf green"></i>
+                            <span class="red">智助通</span>
+                            <span class="grey" id="id-text2">后台管理系统</span>
+                        </h1>
+                        <h4 class="blue" id="k">&copy; 广州市艾依格家居制品有限公司</h4>
+                    </div>
+
+                    <div class="space-6"></div>
+
+                    <div class="position-relative">
+                        <div id="login-box" class="login-box visible widget-box no-border">
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <h4 class="header blue lighter bigger">
+                                        <i class="ace-icon fa fa-coffee green"></i>
+                                        请输入登录信息
+                                    </h4>
+
+                                    <div class="space-6"></div>
+
+                                    <form id="login-form" action="{:url('login')}" method="post">
+                                        <fieldset>
+                                            <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="text" class="form-control" placeholder="账号"
+                                                           name="admin_name" value="{$cookie['admin_name']}"
+                                                           autocomplete="off" required
+                                                           autofocus/>
+                                                    <i class="ace-icon fa fa-user"></i>
+                                                </span>
+                                            </label>
+
+                                            <label class="block clearfix">
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password" class="form-control" placeholder="密码"
+                                                           name="admin_pwd" value="{$cookie['admin_pwd']}"
+                                                           autocomplete="off" required
+                                                           autofocus/>
+                                                    <i class="ace-icon fa fa-lock"></i>
+                                                </span>
+                                            </label>
+
+                                            <div class="clearfix">
+                                                <label class="clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        <input type="text" class="form-control" placeholder="验证码"
+                                                               name="verify" autocomplete="off" maxlength="4" required
+                                                               autofocus/>
+                                                        <i class="icon-comment"></i>
+                                                    </span>
+                                                </label>
+
+                                                <img class="tpl-input" src="{:url('index/master/verify')}" title="点击刷新"
+                                                     id="verify-img" style="margin-top: -4px;">
+                                            </div>
+
+                                            <div class="space"></div>
+
+                                            <div class="clearfix">
+                                                <label class="inline">
+                                                    {eq name="cookie['remember']" value="1"}
+                                                    <input type="checkbox" class="ace" name="remember" value="1"
+                                                           checked/>
+                                                    {else/}
+                                                    <input type="checkbox" class="ace" name="remember" value="1"/>
+                                                    {/eq}
+                                                    <span class="lbl"> 记住我</span>
+                                                </label>
+
+                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary"
+                                                        id="sub-btn">
+                                                    <i class="ace-icon fa fa-key"></i>
+                                                    <span class="bigger-110">登 录</span>
+                                                </button>
+                                            </div>
+
+                                            <div class="space-4"></div>
+                                        </fieldset>
+                                    </form>
+                                </div><!-- /.widget-main -->
+                            </div><!-- /.widget-body -->
+                        </div><!-- /.login-box -->
+                    </div><!-- /.position-relative -->
+
+                    <div class="navbar-fixed-top align-right">
+                        <br/>
+                        &nbsp;
+                        <a id="btn-login-dark" href="#">黑色</a>
+                        &nbsp;
+                        <span class="blue">/</span>
+                        &nbsp;
+                        <a id="btn-login-blur" href="#">蓝色</a>
+                        &nbsp;
+                        <span class="blue">/</span>
+                        &nbsp;
+                        <a id="btn-login-light" href="#">白色</a>
+                        &nbsp; &nbsp; &nbsp;
+                    </div>
+                </div>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.main-content -->
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+{load href="__ROOT__/admin/static/js/jquery-2.1.4.min.js" /}
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+{load href="_STATIC__/js/jquery-1.11.3.min.js" /}
+<![endif]-->
+<script type="text/javascript">
+    if ('ontouchstart' in document.documentElement) document.write("<script src='__ROOT__/admin/static/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+
+{load href="__ROOT__/plugin/layer/layer.js" /}
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    jQuery(function ($) {
+        $(document).on('click', '.toolbar a[data-target]', function (e) {
+            e.preventDefault();
+            var target = $(this).data('target');
+            $('.widget-box.visible').removeClass('visible');//hide others
+            $(target).addClass('visible');//show target
+        });
+    });
+
+    //you don't need this, just used for changing background
+    jQuery(function ($) {
+        $('#btn-login-dark').on('click', function (e) {
+            $('body').attr('class', 'login-layout');
+            $('#id-text2').attr('class', 'white');
+            $('#id-company-text').attr('class', 'blue');
+
+            e.preventDefault();
+        });
+        $('#btn-login-light').on('click', function (e) {
+            $('body').attr('class', 'login-layout light-login');
+            $('#id-text2').attr('class', 'grey');
+            $('#id-company-text').attr('class', 'blue');
+
+            e.preventDefault();
+        });
+        $('#btn-login-blur').on('click', function (e) {
+            $('body').attr('class', 'login-layout blur-login');
+            $('#id-text2').attr('class', 'white');
+            $('#id-company-text').attr('class', 'light-blue');
+
+            e.preventDefault();
+        });
+    });
+
+    $(function () {
+        document.onkeydown = function (event) {
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if (e && e.keyCode == 13) {
+                $("#sub-btn").click();
+            }
+        };
+
+        $("#sub-btn").on('click', function () {
+            //获取登录页面的用户名和密码
+            var form = $("#login-form");
+            var admin_name = form.find('input[name="admin_name"]').val();
+            var admin_pwd = form.find('input[name="admin_pwd"]').val();
+            var verify = form.find('input[name="verify"]').val();
+
+            if (!admin_name) {
+                layer.msg('用户名不能为空', {icon: 5});
+                return false;
+            }
+            if (!admin_pwd) {
+                layer.msg('密码不能为空', {icon: 5});
+                return false;
+            }
+            if (!verify) {
+                layer.msg('验证码不能为空', {icon: 5});
+                return false;
+            }
+            var data = {
+                "admin_name": admin_name,
+                "admin_pwd": admin_pwd,
+                "verify": verify,
+                "remember": form.find('input[name="remember"]:checked').val(),
+                "hash": form.find('input[name="hash"]').val()
+            };
+            var url = form.attr('action');
+            $.post(url, data, function (res) {
+                if (res.code == 1) {
+                    layer.msg(res.message, {time: 1000, icon: 6}, function () {
+                        window.location.href = res.data['JumpUrl'];
+                    })
+                } else {
+                    layer.msg(res.message, {icon: 5}, function () {
+                        $('#verify-img').trigger("click");
+                    });
+                }
+            }, 'JSON');
+        });
+
+        // 刷新验证码
+        $('#verify-img').click(function () {
+            var verifyImg = $(this).attr("src");
+            if (verifyImg.indexOf('?') > 0) {
+                $(this).attr("src", verifyImg + "&random=" + Math.random());
+            } else {
+                $(this).attr("src", verifyImg.replace(/\?.*$/, '') + '?random=' + Math.random());
+            }
+            $('input[name = "verify"]').val('');
+        });
+    })
+</script>
+</body>
+</html>

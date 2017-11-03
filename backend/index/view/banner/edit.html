@@ -1,0 +1,70 @@
+{extend name="common@layout:base" /}
+{block name="title"}修改广告图 - {__block__}{/block}
+{block name="styleLinks"}{/block}
+{block name="styles"}{/block}
+
+{block name="main"}
+<a class="btn btn-primary" href="{:url('index')}">
+    <i class="fa fa-list-alt"></i> 列表
+</a>
+<a class="btn btn-success" href="{:url('create')}">
+    <i class="fa fa-plus"></i> 添加
+</a>
+<div class="hr dotted"></div>
+
+<form class="form-horizontal" action="{:url('update',['banner_id'=>$field.banner_id])}" method="post" enctype="multipart/form-data" role="form">
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 广告图名称： </label>
+        <div class="col-md-9">
+            <input type="text" class="col-xs-10 col-md-5" name="banner_name" value="{$field.banner_name}">
+            <span class="help-inline col-xs-12 col-md-7"><span class="middle red">*</span></span>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 广告图图片： </label>
+        <div class="col-md-9">
+            <input type="file" class="col-xs-10 col-md-5" name="banner_img">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-9">
+            <img src="__ROOT__{$field.banner_url}" alt="原广告图" style="width:100%;height:100%;">
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 是否显示： </label>
+        <div class="col-md-9">
+            <label class="checkbox-inline">
+                <input type="radio" class="ace" name="banner_is_show" value="0"
+                       {$field.banner_is_show==0?'checked':''}/>
+                <span class="lbl"> 否 </span>
+            </label>
+            <label class="checkbox-inline">
+                <input type="radio" class="ace" name="banner_is_show" value="1"
+                       {$field.banner_is_show==1?'checked':''}/>
+                <span class="lbl"> 是 </span>
+            </label>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-2 col-md-9">
+            <input type="hidden" name="banner_id" value="{$field.banner_id}">
+            <input type="hidden" name="banner_url" value="{$field.banner_url}">
+            <button class="btn" type="reset"><i class="fa fa-undo"></i> 重置</button>
+            &nbsp; &nbsp; &nbsp;
+            <button type="submit" class="btn btn-info"><i class="fa fa-check"></i> 提交</button>
+        </div>
+    </div>
+    <div class="hr hr-24"></div>
+</form>
+{/block}
+{block name="scriptLinks"}{/block}
+{block name="scripts"}{/block}

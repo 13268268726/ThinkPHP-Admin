@@ -1,0 +1,92 @@
+{extend name="common@layout:base" /}
+{block name="title"}修改讲师 - {__block__}{/block}
+{block name="styleLinks"}
+{load href="__ROOT__/admin/static/css/dropzone.min.css" /}
+{/block}
+{block name="styles"}{/block}
+
+{block name="main"}
+<a class="btn btn-primary" href="{:url('index')}">
+    <i class="fa fa-list-alt"></i> 列表
+</a>
+<a class="btn btn-success" href="{:url('create')}">
+    <i class="fa fa-plus"></i> 添加
+</a>
+<div class="hr dotted"></div>
+
+<form class="form-horizontal" action="{:url('update',['teacher_id'=>$field.teacher_id])}" method="post"
+      enctype="multipart/form-data" role="form" id="form">
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 讲师姓名： </label>
+        <div class="col-md-9">
+            <input type="text" class="col-xs-5 col-md-4" name="name" value="{$field.name}">
+            <span class="help-inline col-xs-12 col-md-7"><span class="middle red">*</span></span>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 讲师职称： </label>
+        <div class="col-md-9">
+            <input type="text" class="col-xs-5 col-md-4" name="job" value="{$field.job}">
+            <span class="help-inline col-xs-12 col-md-7"><span class="middle red">*</span></span>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 讲师头像： </label>
+        <div class="col-xs-6 col-md-4">
+            <input type="hidden" name="avatar" value="{$field.avatar}" data-src="__ROOT__{$field.avatar}">
+            <div class="dropzone" id="drop-zone" data-action="{:url('upload')}">
+                <div class="fallback">
+                    <input name="upload_img" type="file"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 讲师描述： </label>
+        <div class="col-md-9">
+            <textarea name="desc" cols="80" rows="5">{$field.desc}</textarea>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-right"> 是否显示： </label>
+        <div class="col-md-9">
+            <label class="checkbox-inline">
+                <input type="radio" class="ace" name="is_show" value="0" {$field.is_show==0?'checked':''}/>
+                <span class="lbl"> 否 </span>
+            </label>
+            <label class="checkbox-inline">
+                <input type="radio" class="ace" name="is_show" value="1" {$field.is_show==1?'checked':''}/>
+                <span class="lbl"> 是 </span>
+            </label>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-2 col-md-9">
+            <input type="hidden" name="teacher_id" value="{$field.teacher_id}">
+            <button class="btn" type="reset"><i class="fa fa-undo bigger-110"></i> 重置</button>
+            &nbsp; &nbsp; &nbsp;
+            <button type="button" class="btn btn-primary" id="sub-btn" data-loading-text="正在提交...">
+                <i class="fa fa-check"></i> 提交
+            </button>
+        </div>
+    </div>
+    <div class="hr hr-24"></div>
+</form>
+{/block}
+
+{block name="scriptLinks"}
+{load href="__ROOT__/admin/static/js/dropzone.min.js" /}
+{load href="__ROOT__/admin/static/js/page/teacher.js" /}
+{/block}
+{block name="scripts"}{/block}

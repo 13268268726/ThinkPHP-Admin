@@ -1,0 +1,12 @@
+{extend name="common@layout:base" /}
+{block name="title"}示例 - {__block__}{/block}
+{block name="styleLinks"}{/block}
+{block name="styles"}{/block}
+{block name="breadcrumbs"}
+{:widget('common/Layout/breadcrumbs', ['crumbs'=>['AAA','bbbb','ccc']])}
+{/block}
+{block name="main"}
+这里是内容
+{/block}
+{block name="scriptLinks"}{/block}
+{block name="scripts"}{/block}

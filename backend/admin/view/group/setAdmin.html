@@ -1,0 +1,106 @@
+{extend name="common@layout:base" /}
+{block name="title"}管理员分组添加成员 - {__block__}{/block}
+{block name="styleLinks"}
+{load href="__ROOT__/admin/static/css/bootstrap-duallistbox.min.css" /}
+{/block}
+{block name="styles"}{/block}
+{block name="pageHeader"}
+{:widget('common/Layout/pageHeader',['tit'=>'为<span style="color:#ff0000">'.$group_data['title'].'</span>添加成员'])}
+{/block}
+{block name="main"}
+<button class="btn btn-success" onclick="javascript:history.back(-1);">
+    <i class="ace-icon fa fa-undo"></i>返回
+</button>
+<div class="hr dotted"></div>
+
+<form class="form-horizontal form" role="form"
+      action="{:url('setAdminApi',get_current([]))}">
+
+    <div class="space-4"></div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+            <div class="bootstrap-duallistbox-container row moveonselect">
+                <div class="col-md-6">
+                    <strong>未选中管理员</strong>
+                </div>
+                <div class="col-md-6">
+                    <strong>已选中管理员</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label no-padding-top" for="admin_list"> 选择分组 </label>
+
+        <div class="col-md-8">
+            <select multiple="multiple" size="10" name="admin_list[]" id="admin_list">
+                {foreach name="UserData" item="v"}
+                {in name="v['admin_id']" value="$fieldUserData"}
+                <option value="{$v['admin_id']}" selected="selected">{$v['admin_name']}</option>
+                {else/}
+                <option value="{$v['admin_id']}">{$v['admin_name']}</option>
+                {/in}
+                {/foreach}
+            </select>
+        </div>
+    </div>
+
+    <div class="space-4"></div>
+
+    <div class="clearfix form-actions">
+        <div class="col-md-offset-2 col-md-9">
+            <input type="hidden" name="group_id" value="{$group_data.id}">
+            <button type="reset" class="btn"><i class="icon-undo bigger-110"></i> 重置
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button type="button" class="btn btn-info sub-btn">
+                <i class="icon-ok bigger-110"></i>
+                提交
+            </button>
+        </div>
+    </div>
+</form>
+{/block}
+
+{block name="scriptLinks"}
+{load href="__ROOT__/admin/static/js/jquery.bootstrap-duallistbox.min.js" /}
+{/block}
+
+{block name="scripts"}
+<script>
+    var group_box = $('select[name="admin_list[]"]').bootstrapDualListbox({
+        selectorMinimalHeight: '200',
+        filterTextClear: '显示全部',
+        moveAllLabel: '选择管理员',
+        removeAllLabel: '删除所有',
+        moveSelectedLabel: '移除所有管理员',
+        filterPlaceHolder: '查询',
+        infoText: '管理员个数：{0}',
+        infoTextFiltered: '<span class="label label-warning">没有查询到数据</span> {0} from {1}',
+        infoTextEmpty: '没有管理员了'
+    });
+
+
+    $(function () {
+        $(".sub-btn").on('click', function () {
+            layer.load(2);
+            var formObj = $(this).parents('.form');
+            var AddApi = formObj.attr('action');
+            var json = formObj.serialize();
+
+            $.post(AddApi, json, function (res) {
+                layer.closeAll('loading');
+                if (res.status == 1) {
+                    layer.msg(res.info, {icon: 6, time: 1000}, function () {
+                        window.location.href = res.data['JumpUrl'];
+                    });
+                } else {
+                    layer.msg(res.info, {icon: 5});
+                }
+            }, 'json');
+        });
+    })
+</script>
+{/block}

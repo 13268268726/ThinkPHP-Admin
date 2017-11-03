@@ -1,0 +1,20 @@
+{assign name="num" value=":count($crumbs)-1"}
+{foreach name="crumbs" item="vo"}
+    {if condition="$num eq 0"}
+        <li class="active"><i class="ace-icon fa fa-home home-icon"></i>{$vo}</li>
+    {else /}
+        {switch name="key"}
+        {case value="0"}
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="#">{$vo}</a>
+            </li>
+        {/case}
+        {case value="$num"}
+            <li class="active">{$vo}</li>
+        {/case}
+        {default /}
+            <li><a href="#">{$vo}</a></li>
+        {/switch}
+    {/if}
+{/foreach}

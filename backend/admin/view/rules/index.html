@@ -1,0 +1,323 @@
+{extend name="common@layout:base" /}
+{block name="title"}权限列表 - {__block__}{/block}
+
+{block name="main"}
+<button class="btn btn-primary" onclick="modal.add()">
+    <i class="ace-icon fa fa-plus"></i>添加
+</button>
+<div class="hr dotted"></div>
+
+{notempty name="data"}
+<form action="{:url('sortApi')}" method="post" id="list-form">
+    <table id="simple-table"
+           class="table table-striped table-bordered table-hover table-condensed">
+        <thead>
+        <tr>
+            <th>权限名</th>
+            <th>权限</th>
+            <th>ICON</th>
+            <th>排序</th>
+            <th>是否显示</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach name="data" item="v"}
+        <tr>
+            <td>{$v['_name']}</td>
+            <td>{$v['name']}</td>
+            <td><i class="ace-icon {$v['icon']}"></i></td>
+            <td>
+                <input type="hidden" name="id[]" value="{:$v['id']}">
+                <input type="text" class="input-mini" name="o[]" value="{:$v['o']}">
+            </td>
+            <td>
+                <label class="inline">
+                    {eq name="v['is_link']" value="1"}
+                    <input type="checkbox" class="ace ace-switch ace-switch-4 is-link-btn" checked="checked"/>
+                    {else/}
+                    <input type="checkbox" class="ace ace-switch ace-switch-4 is-link-btn"/>
+                    {/eq}
+                    <span class="lbl middle"></span>
+                </label>
+            </td>
+            <td>
+                <input type="hidden" name="title" value="{$v['title']}">
+                <button type="button" class="btn btn-xs btn-success" data-toggle="button"
+                        ruleId="{$v['id']}"
+                        onclick="modal.add_child(this)">
+                    <i class="icon-plus bigger-120"></i> 添加子权限
+                </button>
+                &nbsp;
+                <button type="button" class="btn btn-xs btn-info" data-toggle="button"
+                        ruleId="{$v['id']}"
+                        onclick="modal.edit(this)">
+                    <i class="icon-pencil"></i> 修改
+                </button>
+                &nbsp;
+                <button type="button" class="btn btn-xs btn-danger" ruleId="{$v['id']}"
+                        onclick="del.run(this)">
+                    <i class="icon-trash bigger-120"></i> 删除
+                </button>
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    <div class="hr dotted"></div>
+    <button id="loading-btn" type="button" class="btn btn-primary" data-loading-text="正在提交...">
+        提交排序
+    </button>
+    <div class="hr dotted"></div>
+</form>
+{else/}
+<div class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"> &times; </button>
+    没有查询到数据记录
+</div>
+{/notempty}
+
+
+<div class="modal fade" id="auth-div" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times;</button>
+                <h4 class="modal-title" id="myModalLabel"> 权限设置</h4></div>
+            <div class="modal-body">
+                <form id="auth-form" class="form-horizontal" action="{:url('formFnApi')}" method="post">
+                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="pid" value="0">
+                    <input type="hidden" name="form_type" value="1">
+                    <table class="table table-striped table-bordered table-hover table-condensed">
+                        <tr>
+                            <th width="12%">权限名：</th>
+                            <td>
+                                <input class="input-large" type="text" name="title">
+                                <span class="help-inline middle red">*</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>权限：</th>
+                            <td>
+                                <input class="input-large" type="text" name="name">
+                                <span class="help-inline middle red">*</span>
+                                <span class="help-block">输入模块/控制器/方法即可（例如 admin/rules/index）</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>ICON：</th>
+                            <td>
+                                <input class="input-large" type="text" name="icon">
+                                <span class="help-block">输入标签class名即可（例如:"fa fa-tag"）</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>显示：</th>
+                            <td>
+                                <label class="checkbox-inline">
+                                    <input type="radio" name="is_link" value="1"> 是
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="radio" name="is_link" value="0"> 否
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>行为<br/>规则：</th>
+                            <td>
+                                <textarea class="form-control" name="rule" rows="4"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>日志<br/>规则：</th>
+                            <td>
+                                <textarea class="form-control" name="log" rows="4"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td>
+                                <input class="btn btn-sm btn-primary" type="button" value="提交" onclick="modal.send()">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="scripts"}
+<script>
+    var ApiDel = "{:url('delete')}";
+    var ApiEdit = "{:url('edit')}";
+    var modal = {
+        // 添加菜单
+        add: function () {
+            var data = [];
+            modal._fetch(data, 1);
+        },
+
+        // 添加子菜单
+        add_child: function (obj) {
+            var data = {'pid': $(obj).attr('ruleId')};
+            modal._fetch(data, 2);
+        },
+
+        // 修改菜单
+        edit: function (obj) {
+            layer.load(2);
+            $.post(ApiEdit, {id: $(obj).attr('ruleId')}, function (data) {
+                layer.closeAll('loading');
+                if (data.status == 1) {
+                    modal._fetch(data.data, 3);
+                } else {
+                    layer.msg(data.info, {icon: 5});
+                }
+            }, 'json');
+        },
+
+        // 提交表单
+        send: function () {
+            layer.load(2);
+            var form = $("#auth-form");
+            $.post(form.attr('action'), form.serialize(), function (res) {
+                layer.closeAll('loading');
+                if (res.status == 1) {
+                    layer.msg(res.info, {icon: 6, time: 1000}, function () {
+                        window.location.href = res.data['JumpUrl'];
+                    });
+                } else {
+                    layer.msg(res.info, {icon: 5});
+                }
+            }, 'json');
+        },
+
+        // 渲染表单数据
+        _fetch: function (data, form_type) {
+            console.log(data);
+            var form = $("#auth-form");
+            $("input[name='form_type']").val(form_type);
+
+            if (data.hasOwnProperty('id')) {
+                $("input[name='id']").val(data['id']);
+            } else {
+                $("input[name='id']").val('');
+            }
+
+            if (data.hasOwnProperty('pid')) {
+                $("input[name='pid']").val(data['pid']);
+            } else {
+                $("input[name='pid']").val('');
+            }
+
+            if (data.hasOwnProperty('title')) {
+                $("input[name='title']").val(data['title']);
+            } else {
+                $("input[name='title']").val('');
+            }
+
+            if (data.hasOwnProperty('name')) {
+                $("input[name='name']").val(data['name']);
+            } else {
+                $("input[name='name']").val('');
+            }
+
+            if (data.hasOwnProperty('icon')) {
+                $("input[name='icon']").val(data['icon']);
+            } else {
+                $("input[name='icon']").val('');
+            }
+
+            if (data.hasOwnProperty('is_link') && data['is_link'] == 1) {
+                form.find("input[name='is_link'][value='0']").prop('checked', false);
+                form.find("input[name='is_link'][value='1']").prop('checked', true);
+            } else {
+                form.find("input[name='is_link'][value='1']").prop('checked', false);
+                form.find("input[name='is_link'][value='0']").prop('checked', true);
+            }
+
+            if (data.hasOwnProperty('rule')) {
+                $("textarea[name='rule']").val(data['rule']);
+            } else {
+                $("textarea[name='rule']").val('');
+            }
+
+            if (data.hasOwnProperty('log')) {
+                $("textarea[name='log']").val(data['log']);
+            } else {
+                $("textarea[name='log']").val('');
+            }
+            $('#auth-div').modal('show');
+        }
+    };
+
+    var del = {
+        run: function (obj) {
+            var title = $(obj).siblings('input[name="title"]').val();
+            layer.confirm('你真的要删除“' + title + '”这个权限吗？', {
+                btn: ['确定', '取消'] //按钮
+            }, function () {
+                layer.load(1);
+                del._send(obj);
+            });
+        },
+        _send: function (obj) {
+            var ruleId = $(obj).attr('ruleId');
+            $.ajax({
+                type: "POST",
+                url: ApiDel,
+                data: {'id': ruleId},
+                dataType: "json",
+                success: function (res) {
+                    layer.closeAll('loading');
+                    if (res.status == 1) {
+                        layer.msg(res.info, {icon: 6, time: 1000}, function () {
+                            $(obj).parents('tr').css('display', 'none');
+                        });
+                    } else {
+                        layer.msg(res.info, {icon: 5});
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    layer.closeAll('loading');
+                    layer.msg('服务器正在忙，请销后提交。', {icon: 5});
+                    console.log(XMLHttpRequest.status);
+                    console.log(XMLHttpRequest.readyState);
+                    console.log(textStatus);
+                }
+            });
+        }
+    };
+
+    // TODO:是否开启功能
+    $('.is-link-btn').on('click', function () {
+        console.log('这里后续添加功能');
+    });
+
+    // 排序
+    jQuery(function ($) {
+        $('#loading-btn').on(ace.click_event, function () {
+            var form = $("#list-form"),
+                    json = form.serialize(),
+                    ApiSort = form.attr('action');
+            var btn = $(this);
+            btn.button('loading');
+            $.post(ApiSort, json, function (res) {
+                btn.button('reset');
+                if (res.status == 1) {
+                    layer.msg(res.info, {icon: 6, time: 1000}, function () {
+                        window.location.href = res.data['JumpUrl'];
+                    });
+                } else {
+                    layer.msg(res.info, {icon: 5});
+                }
+            }, 'json');
+        });
+    })
+</script>{/block}
+
+
+

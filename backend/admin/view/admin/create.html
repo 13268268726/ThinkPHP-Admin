@@ -1,0 +1,297 @@
+{extend name="common@layout:base" /}
+{block name="title"}添加管理员 - {__block__}{/block}
+{block name="styleLinks"}{/block}
+{block name="styles"}
+<style>
+    .avatar-ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .avatar-ul li {
+        width: 100px;
+        float: left;
+        overflow: hidden;
+        margin: 2px;
+        border: 1px solid #999;
+    }
+
+    .avatar-ul li img {
+        margin: 0 auto;
+        display: block;
+    }
+
+    .avatar-ul li label {
+        margin-top: 10px;
+        margin-left: 10px;
+        display: block;
+    }
+</style>
+{/block}
+
+{block name="main"}
+<a class="btn btn-primary" href="{:url('index')}">
+    <i class="fa fa-list-alt"></i> 列表
+</a>
+<a class="btn btn-success" href="{:url('create')}">
+    <i class="fa fa-plus"></i> 添加
+</a>
+<div class="hr hr-18 hr-double dotted"></div>
+
+
+<div class="widget-box">
+    <div class="widget-header widget-header-blue widget-header-flat">
+        <h4 class="widget-title lighter">管理员注册向导</h4>
+
+        <div class="widget-toolbar">
+        </div>
+    </div>
+
+    <div class="widget-body">
+        <div class="widget-main">
+            <div id="fuelux-wizard-container">
+                <div>
+                    <ul class="steps">
+                        <li data-step="1" class="active">
+                            <span class="step">1</span>
+                            <span class="title">基本信息设置</span>
+                        </li>
+
+                        <li data-step="2">
+                            <span class="step">2</span>
+                            <span class="title">密码设置</span>
+                        </li>
+
+                        <li data-step="3">
+                            <span class="step">3</span>
+                            <span class="title">上传头像</span>
+                        </li>
+
+                        <li data-step="4">
+                            <span class="step">4</span>
+                            <span class="title">后台管理说明</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <hr/>
+
+                <div class="step-content pos-rel">
+                    <div class="step-pane active" data-step="1">
+                        <h3 class="lighter block green">填写管理员基本信息</h3>
+                        <form class="form-horizontal" method="post" action="{:url('save')}" id="form1">
+                            <div class="form-group">
+                                <label class="control-label col-sm-3 col-md-2 no-padding-right"
+                                       for="admin_name">账号：</label>
+                                <div class="col-sm-9 col-md-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="admin_name" id="admin_name"
+                                               class="col-xs-12 col-sm-6"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-2"></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-3 col-md-2 no-padding-right"
+                                       for="admin_email">邮箱：</label>
+                                <div class="col-sm-9 col-md-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="admin_email" id="admin_email"
+                                               class="col-xs-12 col-sm-6"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-2"></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-3 col-md-2 no-padding-right">性别：</label>
+                                <div class="col-sm-9 col-md-10">
+                                    <label class="checkbox-inline">
+                                        <input type="radio" class="ace" name="admin_sex" value="0"/>
+                                        <span class="lbl"> 女 </span>
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="radio" class="ace" name="admin_sex" value="1"
+                                               checked/>
+                                        <span class="lbl"> 男 </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="hr hr-dotted"></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-3 col-md-2 no-padding-right"
+                                       for="admin_state">状态：</label>
+                                <div class="col-sm-9 col-md-10">
+                                    <div class="clearfix">
+                                        <select class="input-medium" id="admin_state" name="admin_state">
+                                            <option value="0">--请选择状态--</option>
+                                            <option value="1"> 正常</option>
+                                            <option value="2"> 锁定</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-2"></div>
+                            <input type="hidden" name="step" value="1">
+                        </form>
+                    </div>
+
+                    <div class="step-pane" data-step="2">
+                        <h3 class="lighter block green">填写管理员密码</h3>
+                        <form class="form-horizontal" method="post" action="{:url('save')}" id="form2">
+                            <div class="form-group">
+                                <label class="control-label col-sm-3 col-md-2 no-padding-right"
+                                       for="admin_pwd">密码：</label>
+                                <div class="col-sm-9 col-md-10">
+                                    <div class="clearfix">
+                                        <input type="password" name="admin_pwd" id="admin_pwd"
+                                               class="col-xs-12 col-sm-4"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-2"></div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-3 col-md-2 no-padding-right"
+                                       for="repassword">确认密码：</label>
+
+                                <div class="col-sm-9 col-md-10">
+                                    <div class="clearfix">
+                                        <input type="password" name="repassword" id="repassword"
+                                               class="col-xs-12 col-sm-4"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-2"></div>
+                            <input type="hidden" name="step" value="2"/>
+                            <input type="hidden" name="admin_id" value=""/>
+                        </form>
+                    </div>
+
+                    <div class="step-pane" data-step="3">
+                        <h3 class="lighter block green">选择头像</h3>
+                        <form class="form-horizontal" method="post" action="{:url('save')}" id="form3">
+                            <ul class="avatar-ul">
+                                {for start="1" end="6"}
+                                <li class="b">
+                                    <img src="__ROOT__/admin/avatars/b_{$i}.png" alt="">
+                                    <label>
+                                        <input type="radio" class="ace" name="admin_img"
+                                               value="/admin/avatars/b_{$i}.png">
+                                        <span class="lbl">男生头像{$i}</span>
+                                    </label>
+                                </li>
+                                {/for}
+
+                                {for start="1" end="6"}
+                                <li class="g">
+                                    <img src="__ROOT__/admin/avatars/g_{$i}.png" alt="女生头像{$i}">
+                                    <label>
+                                        <input type="radio" class="ace" name="admin_img"
+                                               value="/admin/avatars/g_{$i}.png">
+                                        <span class="lbl">女生头像{$i}</span>
+                                    </label>
+                                </li>
+                                {/for}
+                            </ul>
+                            <input type="hidden" name="step" value="3"/>
+                            <input type="hidden" name="admin_id" value=""/>
+                        </form>
+                    </div>
+
+                    <div class="step-pane" data-step="4">
+                        <div class="center">
+                            <h3 class="green">谢谢合作</h3>
+                            你已经成功注册账号了！
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr/>
+            <div class="wizard-actions">
+                <button class="btn btn-prev">
+                    <i class="ace-icon fa fa-arrow-left"></i>
+                    上一步
+                </button>
+
+                <button class="btn btn-success btn-next" data-last="完成">
+                    下一步
+                    <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="scriptLinks"}
+{load href="__ROOT__/admin/static/js/wizard.min.js" /}
+{/block}
+
+{block name="scripts"}
+<script type="text/javascript">
+    jQuery(function ($) {
+        $('#fuelux-wizard-container')
+                .ace_wizard({
+                    //step: 2 //optional argument. wizard will jump to step "2" at first
+                    //buttons: '.wizard-actions:eq(0)'
+                })
+                .on('actionclicked.fu.wizard', function (e, info) {
+                    var form;
+                    if (info.step == 1) {
+                        form = $("#form1");
+                    } else if (info.step == 2) {
+                        form = $("#form2");
+                    } else if (info.step == 3) {
+                        form = $("#form3");
+                    }
+
+                    if (info.step == 1 || info.step == 2 || info.step == 3) {
+                        layer.load(2);
+                        $.ajax({
+                            type: "POST",
+                            url: form.attr('action'),
+                            data: form.serialize(),
+                            async: false,
+                            dataType: 'json',
+                            success: function (res) {
+                                layer.closeAll('loading');
+                                if (res.status == 1) {
+                                    $("#form2").find('input[name="admin_id"]').val(res.data['admin_id']);
+                                    $("#form3").find('input[name="admin_id"]').val(res.data['admin_id']);
+                                } else {
+                                    e.preventDefault();
+                                    layer.msg(res.info, {icon: 5});
+                                }
+                            }
+                        });
+                    }
+
+                    if (info.step == 1) {
+                        form = $("#form3");
+                        var admin_sex = $("#form1").find('input[name="admin_sex"]:checked').val();
+                        if (admin_sex == 1) {
+                            form.find('.b').show();
+                            form.find('.g').hide();
+                        } else {
+                            form.find('.b').hide();
+                            form.find('.g').show();
+                        }
+                    }
+                })
+                //.on('changed.fu.wizard', function() {
+                //})
+                .on('finished.fu.wizard', function (e) {
+                    layer.msg("正在返回列表页", {icon: 6}, function () {
+                        window.location.href = "{:url('index')}";
+                    });
+                }).on('stepclick.fu.wizard', function (e) {
+            //e.preventDefault();//this will prevent clicking and selecting steps
+        });
+    })
+</script>
+{/block}
